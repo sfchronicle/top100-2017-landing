@@ -16,7 +16,6 @@ body {
   margin: 0;
   //remove 300ms click delay in Safari, AKA still the worst
   touch-action: manipulation;
-
   background-color: @white;
   font-size: @base-font;
   line-height:@line-height;
@@ -67,7 +66,8 @@ hr {
   margin-bottom: 15px;
   margin-top: 35px;
   text-align: center;
-  font-family: @body-bold;
+  font-weight:bold;
+  font-family: @body;
   &.padded {
     padding-top: 10px;
   }
@@ -106,7 +106,7 @@ li {
   margin-top: 10px;
   margin-bottom: 5px;
   text-align: center;
-  font-family: @block-graphics;
+  font-family: @title-bold;
   font-weight: bold;
   @media @mobile {
     padding: 0 10px;
@@ -126,7 +126,7 @@ li {
   font-size: 15px;
   text-align: center;
   padding-bottom: 5px;
-  font-family: @block-graphics;
+  font-family: @title-bold;
   margin: 20px auto;
   &.lesspadding {
     margin: 10px auto;
@@ -154,7 +154,7 @@ li {
   font-size: 12px;
   // color: @white;
   font-style: italic;
-  font-family: @block-graphics;
+  font-family: @title-bold;
   @media @tablet {
     padding: 10px 20px;
   }
@@ -175,7 +175,7 @@ svg {
 }
 text {
   font-size: 14px;
-  font-family: @block-graphics;
+  font-family: @title-bold;
   @media @mobile {
     font-size: 12px;
   }
@@ -211,7 +211,7 @@ text {
 }
 
 .title {
-  font-family: @body-bold;
+  font-family: @title-bold;
   font-size: 60px;
   padding: 0 10px;
   text-align: center;
@@ -490,54 +490,6 @@ header {
     }
 }
 
-// video embed code ------------------------------------
-
-.embed-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.embed-container iframe, .embed-container object, .embed-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-// don't miss ------------------------------------------
-
-.dont-miss {
-  .display-flex;
-  .flex-wrap(wrap);
-  margin-bottom: 20px;
-  font-size: 17px;
-  font-family: @block-graphics;
-  @media @mobile {
-    margin-bottom: 40px;
-  }
-
-  .story {
-    .flex(0 0 25%);
-
-    @media @mobile {
-      .flex(1 1 50%)
-    }
-  }
-  .padded {
-    padding: 10px;
-  }
-  .small {
-    font-weight: bold;
-    font-size: 15px;
-  }
-  img {
-    width: 100%;
-  }
-}
 
 // footer -------------------------------------------
 
