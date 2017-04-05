@@ -1,7 +1,7 @@
 node_modules
 build
 temp
-data
+data/*.json
 .DS_Store
 npm-debug.log
 src/js/lib/*/**
