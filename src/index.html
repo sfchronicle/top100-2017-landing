@@ -12,8 +12,23 @@
   </head>
   <body>
 
+    <div id="header">
+      <div class="cover">
+      <img src="./assets/logos/logo_grey.png">
+      </div>
+    </div>
 
-    <%= t.include("partials/_footer.html") %>
+    <div id="search"></div>
+    
+    <div id="restaurants">
+      <% json.info.forEach(function(r) { %>
+        <div class="restaurant">
+          <img src="<%= r.photo1 %>">
+          <div><%= r.Name %></div>
+          <div><%= r.Cuisine %> | <%= r.SubRegion %></div>
+        </div>
+      <% }); %>
+    </div>
 
     <script>
       var textData = <%= JSON.stringify(json.top_100_2017_digital_text) %>
