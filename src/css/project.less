@@ -9,7 +9,7 @@
 		img{
 			width:50%;
 			max-width:400px;
-		}	
+		}
 	}
 }
 
@@ -22,5 +22,26 @@
 
 	.restaurant{
 		.flex(0 1 23%);
+	}
+}
+
+.controls-container {
+	font-family: @sans-serif;
+	.search-container {
+	  max-width: 900px;
+		margin: auto;
+		input {
+			width: 90%;
+			font-family: @sans-serif;
+			font-size: 16px;
+			padding: 2px 5px;
+			border-radius: 5px;
+		}
+	}
+	.dropdown-container, .button {
+	  font-size: 16px;
+		width: 200px;
+		text-align: center;
+		display: inline-block;
 	}
 }
