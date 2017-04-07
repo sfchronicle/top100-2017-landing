@@ -49,7 +49,7 @@ var selNoise = document.getElementById('select-noise');
 // cost drop-down ---------------------------
 var selPrice = document.getElementById('select-price');
 
-// putting event listeners on all the filters ---------------------------------------
+// function to assess all the filters when user picks a new one ---------------------------------------
 
 var cuisine_flag = 1, region_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
 
@@ -111,8 +111,10 @@ function check_filters() {
       brunch_flag = 1;
     }
 
+    // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, region_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
 
+    // show it if yes
     if (flag_min == 1){
       $(this).addClass("active");
       count += 1;
@@ -130,6 +132,8 @@ function check_filters() {
   }
 
 };
+
+// event listeners for all the filters -------------------------------------------------
 
 // event listener for cuisine drop down
 selCuisine.addEventListener("change",function(){
