@@ -57,17 +57,21 @@
           <option value='bomb' class="option">&#xf1e2;</option>
         </select>
       </div>
-      <div class="button" id="nearme"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</div>
-      <div class="button" id="new">New additions</div>
-      <div class="button" id="brunch">Brunch spots</div>
+      <div class="button" id="nearme"><a class="link-button" href="./map/index.html" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</a></div>
+      <div class="button" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
+      <div class="button" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
       <div class="button" id="alcohol"><i class="fa fa-glass" aria-hidden="true"></i>Serves alcohol</div>
     </div>
 
-    <div class="map-noresults hide" id="map-noresults">No restaurants match your search. Try new search terms.</div>
+    <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search terms.</div>
 
     <div id="restaurants">
       <% json.info.forEach(function(r) { %>
-        <div class="restaurant">
+        <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
+        <% var cuisines = r.Cuisine.toLowerCase().replace('and',''); %>
+        <% var regions = r.Region.toLowerCase().replace(/ /g,''); %>
+        <% var neighborhoods = r.SubRegion.toLowerCase().replace(/\//g, " "); %>
+        <div class="restaurant <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=r.New%> active" id="<%=restaurantID%>">
           <img src="<%= r.photo1 %>">
           <div><%= r.Name %></div>
           <div><%= r.Cuisine %> | <%= r.SubRegion %></div>
