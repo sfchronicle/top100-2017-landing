@@ -3,10 +3,12 @@ require("./lib/social"); //Do not delete
 // var len = Object.keys(textData).length;
 // var keys = Object.keys(textData);
 
-// fucntion to find minimum
+// function to find minimum
 Array.prototype.min = function() {
   return Math.min.apply(null, this);
 };
+
+console.log(mapData);
 
 // setting up drop-down menus -------------------------------------------------
 
@@ -41,9 +43,15 @@ for(var i = 0; i < neighborhoods.length; i++) {
     selNeighborhoods.appendChild(opt);
 }
 
+// noise drop-down ---------------------------
+var selNoise = document.getElementById('select-noise');
+
+// cost drop-down ---------------------------
+var selPrice = document.getElementById('select-price');
+
 // putting event listeners on all the filters ---------------------------------------
 
-var cuisine_flag = 1, region_flag = 1, neighborhood_flag = 1, flag_min = 1;
+var cuisine_flag = 1, region_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
 
 function check_filters() {
 
@@ -75,7 +83,35 @@ function check_filters() {
       neighborhood_flag = 1;
     }
 
-    flag_min = [cuisine_flag, region_flag, neighborhood_flag].min();
+    // check noise
+    if (selNoise.value != "all"){
+      noise_flag = (classes.indexOf(selNoise.value)>0)
+    } else {
+      noise_flag = 1;
+    }
+
+    // check price
+    if (selPrice.value != "all"){
+      price_flag = (classes.indexOf(selPrice.value)>0)
+    } else {
+      price_flag = 1;
+    }
+
+    // check for new restaurants
+    if (new_button.value != "all"){
+      new_flag = (classes.indexOf(new_button.value)>0)
+    } else {
+      new_flag = 1;
+    }
+
+    // check for restaurants serving brunch
+    if (brunch_button.value != "all"){
+      brunch_flag = (classes.indexOf(brunch_button.value)>0)
+    } else {
+      brunch_flag = 1;
+    }
+
+    flag_min = [cuisine_flag, region_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
 
     if (flag_min == 1){
       $(this).addClass("active");
@@ -105,7 +141,47 @@ selRegion.addEventListener("change",function(){
   check_filters();
 });
 
-// event listener for region drop down
+// event listener for neighborhoods drop down
 selNeighborhoods.addEventListener("change",function(){
   check_filters();
+});
+
+// event listener for noise drop down
+selNoise.addEventListener("change",function(){
+  check_filters();
+});
+
+// event listener for prices drop down
+selPrice.addEventListener("change",function(){
+  check_filters();
+});
+
+// event listener for "New" button
+function toggle_new(b){b.value=(b.value=="new")?"all":"new";}
+var new_button = document.getElementById('new');
+new_button.value = "all";
+new_button.addEventListener("click",function() {
+  toggle_new(this);
+  $(this).toggleClass("selected");
+  check_filters();
+});
+
+// event listener for "Brunch" button
+function toggle_brunch(b){b.value=(b.value=="brunch")?"all":"brunch";}
+var brunch_button = document.getElementById('brunch');
+brunch_button.value = "all";
+brunch_button.addEventListener("click",function() {
+  toggle_brunch(this);
+  $(this).toggleClass("selected");
+  check_filters();
+});
+
+// saving restaurants as favorites ------------------------------------------------
+
+var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+qsa(".save-restaurant").forEach(function(restaurant,index) {
+  restaurant.addEventListener("click", function(e) {
+    console.log(restaurant.id);
+    $("i", this).toggleClass("fa-star-o fa-star");
+  });
 });

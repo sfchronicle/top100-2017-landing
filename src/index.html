@@ -57,10 +57,10 @@
           <option value='bomb' class="option">&#xf1e2;</option>
         </select>
       </div>
-      <div class="button" id="nearme"><a class="link-button" href="./map/index.html" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</a></div>
       <div class="button" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
       <div class="button" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
-      <div class="button" id="alcohol"><i class="fa fa-glass" aria-hidden="true"></i>Serves alcohol</div>
+      <div class="button" id="nearme"><a class="link-button" href="./map/index.html" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</a></div>
+      <div class="button" id="mylist"><a class="link-button" href="./my-list/index.html" target="_blank"><i class="fa fa-star" aria-hidden="true"></i>My list</a></div>
     </div>
 
     <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search terms.</div>
@@ -71,9 +71,14 @@
         <% var cuisines = r.Cuisine.toLowerCase().replace('and',''); %>
         <% var regions = r.Region.toLowerCase().replace(/ /g,''); %>
         <% var neighborhoods = r.SubRegion.toLowerCase().replace(/\//g, " "); %>
-        <div class="restaurant <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=r.New%> active" id="<%=restaurantID%>">
-          <img src="<%= r.photo1 %>">
-          <div><%= r.Name %></div>
+        <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
+        <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
+        <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
+        <% console.log(r["wcm_img"]) %>
+        <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
+        <div class="restaurant <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
+          <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
+          <div><%= r.Name %><span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></div>
           <div><%= r.Cuisine %> | <%= r.SubRegion %></div>
         </div>
       <% }); %>
