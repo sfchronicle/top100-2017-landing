@@ -1,4 +1,5 @@
 require("./lib/social"); //Do not delete
+var awesome = require("awesomplete");
 
 // var len = Object.keys(textData).length;
 // var keys = Object.keys(textData);
@@ -8,7 +9,34 @@ Array.prototype.min = function() {
   return Math.min.apply(null, this);
 };
 
-console.log(mapData);
+//
+
+// search bar code -------------------------------------------------------------
+
+$("#searchrestaurants").bind("input propertychange", function (evt) {
+  console.log($("#searchrestaurants").val());
+  console.log($("#restaurantlist").find('option:selected').attr('id'));
+});
+
+$("#restaurantlist").change(function(){
+  console.log($("#restaurantlist").find('option:selected').attr('id'));
+})
+
+// document.querySelector('#searchrestaurants').addEventListener('awesomplete-select', function(evt){
+//   console.log("got here and selected a thing");
+//   console.log(this.value);
+//   console.log(evt);
+//   console.log(this.getAttribute("id"));
+// })
+
+// console.log(document.getElementById('searchrestaurants'));
+// var input = document.getElementById("searchrestaurants");
+// new Awesomplete(input, {list: "#restaurantlist"});
+//
+// input.addEventListener('awesomplete-selectcomplete',function(){
+//   alert(this.value);
+// });
+
 
 // setting up drop-down menus -------------------------------------------------
 
@@ -187,5 +215,78 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
     console.log(restaurant.id);
     $("i", this).toggleClass("fa-star-o fa-star");
+
+    // check for log on information
+    console.log("checking for log on information");
+    var edbId;
+    console.log(edbId);
+    function setCheckUser(delay, repetitions, success, error) {
+      var x = 0;
+      console.log(x);
+      var intervalID = window.setInterval(function () {
+        // loop while waiting for syncPaymeterSdk to load
+        console.log(window.syncPaymeterSdk);
+        if ( window.syncPaymeterSdk ) {
+          window.clearInterval( intervalID );
+          var a = window.syncPaymeterSdk;
+          console.log(a);
+          a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
+           // set callback for completion of authorization
+           console.log(a.events.onAuthorizeSuccess);
+           console.log(treg);
+           console.log(treg.identity.edbId);
+            if ( treg.identity.edbId ) {
+              console.log(success);
+              if ( success && typeof(success) === "function" ) {
+                success(treg.identity);
+              }
+            } else {
+              console.log(error);
+              if ( error && typeof(error) === "function" ) {
+                error();
+              }
+            }
+          });
+        } else if ( ++x === repetitions ) {
+          console.log("we've timed out");
+          window.clearInterval( intervalID );
+          if ( error && typeof(error) === "function" ) {
+            error();
+          }
+        }
+      }, delay );
+    }
+    function errorCallBack() {
+      console.log("error");
+      $("#nouser").removeClass("hidden");
+    }
+    function successCallBack(identity) {
+      console.log("success");
+      // edbId = identity.edbId;
+      // $("#userwelcome").html("Welcome " + identity.displayName);
+      // $("#founduser").removeClass("hidden");
+      getData();
+    }
+
+    var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
+    console.log(edbId);
+    console.log(result);
+
+    // retreive data
+    function getData() {
+      console.log("getting data");
+      $.ajax({
+        method: "GET",
+        dataType: "json",
+        url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
+        error: function(msg) { console.log("fail"); },
+        success: function(data) { console.log("success"); }
+      });
+    }
+
+    // save new data
+
+
   });
+
 });

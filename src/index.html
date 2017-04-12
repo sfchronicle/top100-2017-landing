@@ -18,9 +18,28 @@
       </div>
     </div>
 
+    <!-- Gigya signin -->
+    <div class="treg-is-gigya gigya_menu" style="float:right">
+      <div class="gya-title expandable treg-conditional treg-not-logged-in"><span>Sign In</span></div>
+      <div class="gya-title expandable treg-conditional treg-logged-in"><span></span></div>
+      <div class="gya-content expandable">
+          <div class="treg-gya-login-widget"></div>
+      </div> <!-- /.gya-content -->
+    </div>
+
+    <div id="nouser" class="hidden">
+      Please log in to save settings.
+    </div>
+
     <div class="search-container">
       <span class="search"><i class="fa fa-search" aria-hidden="true"></i></span>
-      <input class="input" id="searchmap" type="text" placeholder='Try "French" or "Oakland" ...'></input>
+      <input class="input awesomeplete" list="restaurantlist" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...'></input>
+      <datalist id="restaurantlist">
+        <% json.info.forEach(function(r) { %>
+          <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
+        	<option id="select<%=restaurantID%>"><%= r.Name %> | <%= r.Cuisine %> | <%= r.Region %> | <%= r.SubRegion %> | <a href="tel:<%= r.Phone %>"><%= r.Phone %></a> </option>
+        <% }); %>
+      </datalist>
     </div>
     <div class="filters-container">
       <div class="dropdown-container" id="choose-region">
@@ -74,7 +93,6 @@
         <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
         <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
         <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
-        <% console.log(r["wcm_img"]) %>
         <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
         <div class="restaurant <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
           <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
