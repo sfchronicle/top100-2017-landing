@@ -297,7 +297,7 @@ text {
   &.social {
     float: right;
     margin: 0 6px;
-    padding: 4px 2px;
+    padding: 3px 2px;
     a {
       color: @gray-blue;
     }
@@ -310,9 +310,15 @@ text {
   cursor: pointer;
   margin: 0 0 0 10px;
   vertical-align:0;
+  padding: 8px 0 0;
+  line-height:44px;
   img {
     opacity: 1;
     height: 20px;
+  }
+
+  @media @mobile{
+    margin-left:5px;
   }
 }
 

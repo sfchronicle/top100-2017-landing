@@ -13,26 +13,18 @@
   <body>
 
     
-
-    <!-- Gigya signin -->
-    <div class="treg-is-gigya gigya_menu" style="float:right">
-      <div class="gya-title expandable treg-conditional treg-not-logged-in"><span>Sign In</span></div>
-      <div class="gya-title expandable treg-conditional treg-logged-in"><span></span></div>
-      <div class="gya-content expandable">
-          <div class="treg-gya-login-widget"></div>
-      </div> <!-- /.gya-content -->
-    </div>
-
-    <!-- <div id="nouser" class="hidden">
-      Please log in to save settings.
-    </div> -->
+    <%= t.include("partials/_top-nav.html") %>
 
     <div id="header">
-      <div class="cover">
-        <img src="./assets/logos/cover.png">
-      </div>
-      <div class="top100-logo">
-        <img src="./assets/logos/logo_black.png">
+      <div id="cover-wrapper">
+        <div class="cover"></div>
+        <div class="top100-logo">
+         <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
+         <%= t.include("partials/_social.html") %>
+        </div>
+        <div class="intro-text">
+          <p>Whether they cost $10 or $500 a person, I’ve visited each of these restaurants at least three times — and in most cases, many more. Each year I revisit the restaurants on the previous year’s list and then add contenders from my weekly reviews and updates.</p>
+        </div>
       </div>
 
     
@@ -90,6 +82,7 @@
       <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search terms.</div>
 
     </div>
+
 
     <div id="restaurants">
       <% json.info.forEach(function(r) { %>
