@@ -12,12 +12,13 @@
   </head>
   <body>
 
-    
-    <%= t.include("partials/_top-nav.html") %>
 
+<div id="container">
+  <div id="left-nav">
     <div id="header">
       <div id="cover-wrapper">
         <div class="cover"></div>
+        <div class="sf-logo"><img src="./assets/logos/sf_logo_black.png"></div>
         <div class="top100-logo">
          <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
          <%= t.include("partials/_social.html") %>
@@ -39,24 +40,20 @@
         </datalist>
       </div>
       <div class="filters-container">
-        <div class="dropdown-container" id="choose-region">
-          <select name="select" id="select-region">
-            <option value='all' class="option">All regions</option>
-          </select>
-        </div>
+        
         <div class="dropdown-container" id="choose-neighborhood">
           <select name="select" id="select-neighborhood">
-            <option value='all' class="option">All neighborhoods</option>
+            <option value='all' class="option">Neighborhoods</option>
           </select>
         </div>
         <div class="dropdown-container" id="choose-cuisine">
           <select name="select" id="select-cuisine">
-            <option value='all' class="option">All cuisines</option>
+            <option value='all' class="option">Cuisines</option>
           </select>
         </div>
         <div class="dropdown-container" id="choose-prices">
           <select name="select" id="select-price">
-            <option value='all' class="option">All prices</option>
+            <option value='all' class="option">Prices</option>
             <option value='onedollar' class="option">$</option>
             <option value='twodollar' class="option">$$</option>
             <option value='threedollar' class="option">$$$</option>
@@ -65,7 +62,7 @@
         </div>
         <div class="dropdown-container" id="choose-noise">
           <select name="select" id="select-noise">
-            <option value='all' class="option">All noise levels</option>
+            <option value='all' class="option">Noise levels</option>
             <option value='onebell' class="option">&#xf0f3;</option>
             <option value='twobells' class="option">&#xf0f3; &#xf0f3;</i></option>
             <option value='threebells' class="option">&#xf0f3; &#xf0f3; &#xf0f3;</option>
@@ -73,33 +70,48 @@
             <option value='bomb' class="option">&#xf1e2;</option>
           </select>
         </div>
-        <div class="button" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
-        <div class="button" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
+
+        <div class="dropdown-container" id="choose-guide">
+          <select name="select" id="select-guide">
+            <option value='all' class="option">Guides</option>
+          </select>
+        </div>
+        
         <div class="button" id="nearme"><a class="link-button" href="./map/index.html" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</a></div>
+
         <div class="button" id="mylist"><a class="link-button" href="./my-list/index.html" target="_blank"><i class="fa fa-star" aria-hidden="true"></i>My list</a></div>
       </div>
-
-      <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search terms.</div>
+      <div class="login">
+        <!-- Gigya signin -->
+        <div class="treg-is-gigya gigya_menu" >
+          <div class="gya-title expandable treg-conditional treg-not-logged-in">My list requires login.<br><span class="login-gya-btn">Log In</span></div>
+          <div class="gya-title expandable treg-conditional treg-logged-in"><span></span></div>
+          <div class="gya-content expandable">
+            <div class="treg-gya-login-widget"></div>
+          </div>
+        </div>
+      </div>
 
     </div>
 
-
+    </div>
     <div id="restaurants">
       <% json.info.forEach(function(r) { %>
         <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
-        <% var cuisines = r.Cuisine.toLowerCase().replace('and',''); %>
-        <% var regions = r.Region.toLowerCase().replace(/ /g,''); %>
-        <% var neighborhoods = r.SubRegion.toLowerCase().replace(/\//g, " "); %>
+        <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
+        <% var neighborhoods = r.SubRegion.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
         <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
         <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
         <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
         <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
-        <div class="restaurant <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
+        <div class="restaurant <%=cuisines%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
           <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
           <div class="name"><%= r.Name %><span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></div>
           <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
         </div>
       <% }); %>
+      <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search filters.</div>
+    </div>
     </div>
 
     <script src="app.js" async></script>

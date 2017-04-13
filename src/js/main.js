@@ -106,16 +106,6 @@ for(var i = 0; i < cuisines.length; i++) {
     selCuisine.appendChild(opt);
 }
 
-// regions drop-down -------------------
-var regions = ["East Bay","North Bay","San Francisco","South Bay"];
-var selRegion = document.getElementById('select-region');
-for(var i = 0; i < regions.length; i++) {
-    var opt = document.createElement('option');
-    opt.innerHTML = regions[i];
-    opt.value = regions[i].toLowerCase().replace(/ /g,'');
-    selRegion.appendChild(opt);
-}
-
 // neighborhoods drop-down ------------------
 var neighborhoods = ["Berkeley","Burlingame","Castro","Chinatown","Civic Center","Cow Hollow","Daly City",
 "Embarcadero","Fairfax","Financial District","Hayes Valley","Healdsburg","Los Gatos","Lower Pacific Heights","Marina","Mid-Market","Mission","Napa","Nob Hill","Noe Valley","NoPa","North Beach","Oakland","Pacific Heights","Port Costa","Presidio","Russian Hill","Sausalito","SoMa","St. Helena","Tenderloin","The Richmond","Union Square","Western Addition","Yountville"];
@@ -135,7 +125,7 @@ var selPrice = document.getElementById('select-price');
 
 // function to assess all the filters when user picks a new one ---------------------------------------
 
-var cuisine_flag = 1, region_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
+var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
 
 function check_filters() {
 
@@ -151,13 +141,6 @@ function check_filters() {
       cuisine_flag = (classes.indexOf(selCuisine.value)>0)
     } else {
       cuisine_flag = 1;
-    }
-
-    // check region
-    if (selRegion.value != "all"){
-      region_flag = (classes.indexOf(selRegion.value)>0)
-    } else {
-      region_flag = 1;
     }
 
     // check neighborhood
@@ -181,22 +164,9 @@ function check_filters() {
       price_flag = 1;
     }
 
-    // check for new restaurants
-    if (new_button.value != "all"){
-      new_flag = (classes.indexOf(new_button.value)>0)
-    } else {
-      new_flag = 1;
-    }
-
-    // check for restaurants serving brunch
-    if (brunch_button.value != "all"){
-      brunch_flag = (classes.indexOf(brunch_button.value)>0)
-    } else {
-      brunch_flag = 1;
-    }
 
     // see if the restaurant satisfies all conditions set by user
-    flag_min = [cuisine_flag, region_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
+    flag_min = [cuisine_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
 
     // show it if yes
     if (flag_min == 1){
@@ -224,11 +194,6 @@ selCuisine.addEventListener("change",function(){
   check_filters();
 });
 
-// event listener for region drop down
-selRegion.addEventListener("change",function(){
-  check_filters();
-});
-
 // event listener for neighborhoods drop down
 selNeighborhoods.addEventListener("change",function(){
   check_filters();
@@ -244,25 +209,6 @@ selPrice.addEventListener("change",function(){
   check_filters();
 });
 
-// event listener for "New" button
-function toggle_new(b){b.value=(b.value=="new")?"all":"new";}
-var new_button = document.getElementById('new');
-new_button.value = "all";
-new_button.addEventListener("click",function() {
-  toggle_new(this);
-  $(this).toggleClass("selected");
-  check_filters();
-});
-
-// event listener for "Brunch" button
-function toggle_brunch(b){b.value=(b.value=="brunch")?"all":"brunch";}
-var brunch_button = document.getElementById('brunch');
-brunch_button.value = "all";
-brunch_button.addEventListener("click",function() {
-  toggle_brunch(this);
-  $(this).toggleClass("selected");
-  check_filters();
-});
 
 // saving restaurants as favorites ------------------------------------------------
 
