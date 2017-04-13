@@ -37,6 +37,64 @@ $("#restaurantlist").change(function(){
 //   alert(this.value);
 // });
 
+// check for log on information ------------------------------------------------
+var edbId;
+function setCheckUser(delay, repetitions, success, error) {
+  var x = 0;
+  var intervalID = window.setInterval(function () {
+    // loop while waiting for syncPaymeterSdk to load
+    if ( window.syncPaymeterSdk ) {
+      window.clearInterval( intervalID );
+      var a = window.syncPaymeterSdk;
+      a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
+       // set callback for completion of authorization
+        if ( treg.identity.edbId ) {
+          if ( success && typeof(success) === "function" ) {
+            success(treg.identity);
+          }
+        } else {
+          if ( error && typeof(error) === "function" ) {
+            error();
+          }
+        }
+      });
+    } else if ( ++x === repetitions ) {
+      window.clearInterval( intervalID );
+      if ( error && typeof(error) === "function" ) {
+        error();
+      }
+    }
+  }, delay );
+}
+function errorCallBack() {
+  console.log("error");
+  $("#nouser").removeClass("hidden");
+}
+function successCallBack(identity) {
+  console.log("success");
+  edbId = identity.edbId;
+  console.log(edbId);
+  // $("#userwelcome").html("Welcome " + identity.displayName);
+  // $("#founduser").removeClass("hidden");
+  getData();
+//  console.log(savedData);
+}
+
+var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
+
+// retreive data
+var savedData;
+function getData() {
+  $.ajax({
+    method: "GET",
+    dataType: "json",
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
+    error: function(msg) { console.log("fail"); },
+    success: function(data) { console.log("success"); savedData = data; console.log(savedData);}
+  });
+}
+
+
 
 // setting up drop-down menus -------------------------------------------------
 
@@ -210,81 +268,34 @@ brunch_button.addEventListener("click",function() {
 
 // saving restaurants as favorites ------------------------------------------------
 
+if (savedData) {
+  var restaurantList = savedData;
+} else {
+  var restaurantList = [];
+}
+
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 qsa(".save-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
     console.log(restaurant.id);
     $("i", this).toggleClass("fa-star-o fa-star");
 
-    // check for log on information
-    console.log("checking for log on information");
-    var edbId;
-    console.log(edbId);
-    function setCheckUser(delay, repetitions, success, error) {
-      var x = 0;
-      console.log(x);
-      var intervalID = window.setInterval(function () {
-        // loop while waiting for syncPaymeterSdk to load
-        console.log(window.syncPaymeterSdk);
-        if ( window.syncPaymeterSdk ) {
-          window.clearInterval( intervalID );
-          var a = window.syncPaymeterSdk;
-          console.log(a);
-          a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
-           // set callback for completion of authorization
-           console.log(a.events.onAuthorizeSuccess);
-           console.log(treg);
-           console.log(treg.identity.edbId);
-            if ( treg.identity.edbId ) {
-              console.log(success);
-              if ( success && typeof(success) === "function" ) {
-                success(treg.identity);
-              }
-            } else {
-              console.log(error);
-              if ( error && typeof(error) === "function" ) {
-                error();
-              }
-            }
-          });
-        } else if ( ++x === repetitions ) {
-          console.log("we've timed out");
-          window.clearInterval( intervalID );
-          if ( error && typeof(error) === "function" ) {
-            error();
-          }
-        }
-      }, delay );
-    }
-    function errorCallBack() {
-      console.log("error");
-      $("#nouser").removeClass("hidden");
-    }
-    function successCallBack(identity) {
-      console.log("success");
-      // edbId = identity.edbId;
-      // $("#userwelcome").html("Welcome " + identity.displayName);
-      // $("#founduser").removeClass("hidden");
-      getData();
-    }
-
-    var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
-    console.log(edbId);
-    console.log(result);
-
-    // retreive data
-    function getData() {
-      console.log("getting data");
-      $.ajax({
-        method: "GET",
-        dataType: "json",
-        url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
-        error: function(msg) { console.log("fail"); },
-        success: function(data) { console.log("success"); }
-      });
-    }
 
     // save new data
+    restaurantList.push(restaurant.id);
+    var newSavedData = {edbId:edbId,restaurants:restaurantList};
+    console.log("SENDING DATA ");
+    // savedData.push()
+    console.log(JSON.stringify(newSavedData));
+    $.ajax({
+      method: "POST",
+      data: JSON.stringify(newSavedData),
+      contentType: "application/json",
+      success: function(msg) { console.log("success"); },
+      error: function(msg) { console.log("fail"); },
+      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
+    });
+    return false;
 
 
   });
