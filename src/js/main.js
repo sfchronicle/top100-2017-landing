@@ -1,8 +1,6 @@
 require("./lib/social"); //Do not delete
 var awesome = require("awesomplete");
 
-// var len = Object.keys(textData).length;
-// var keys = Object.keys(textData);
 
 // function to find minimum
 Array.prototype.min = function() {
