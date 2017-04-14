@@ -167,6 +167,19 @@ function check_filters() {
       price_flag = 1;
     }
 
+    // check for new restaurants
+    if (new_button.value != "all"){
+      new_flag = (classes.indexOf(new_button.value)>0)
+    } else {
+      new_flag = 1;
+    }
+
+    // check for restaurants serving brunch
+    if (brunch_button.value != "all"){
+      brunch_flag = (classes.indexOf(brunch_button.value)>0)
+    } else {
+      brunch_flag = 1;
+    }
 
     // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
@@ -212,6 +225,25 @@ selPrice.addEventListener("change",function(){
   check_filters();
 });
 
+// event listener for "New" button
+function toggle_new(b){b.value=(b.value=="new")?"all":"new";}
+var new_button = document.getElementById('new');
+new_button.value = "all";
+new_button.addEventListener("click",function() {
+  toggle_new(this);
+  $(this).toggleClass("selected");
+  check_filters();
+});
+
+// event listener for "Brunch" button
+function toggle_brunch(b){b.value=(b.value=="brunch")?"all":"brunch";}
+var brunch_button = document.getElementById('brunch');
+brunch_button.value = "all";
+brunch_button.addEventListener("click",function() {
+  toggle_brunch(this);
+  $(this).toggleClass("selected");
+  check_filters();
+});
 
 // saving restaurants as favorites ------------------------------------------------
 
