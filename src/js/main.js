@@ -105,6 +105,9 @@ for(var i = 0; i < cuisines.length; i++) {
     opt.value = cuisines[i].toLowerCase().replace(/ /g,'');
     selCuisine.appendChild(opt);
 }
+$('#select-cuisine').on('change', function(){
+    $('body,html').animate({ scrollTop: $('#restaurants').position().top },500); 
+});
 
 // neighborhoods drop-down ------------------
 var neighborhoods = ["Berkeley","Burlingame","Castro","Chinatown","Civic Center","Cow Hollow","Daly City",
@@ -245,3 +248,21 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
   });
 
 });
+
+// filter button on mobile scrolls to top
+$('#filter-btn').on('click', function(){
+    $('body,html').animate({ scrollTop: $('#search').position().top },150);
+});
+
+// show the bottom nav only on small screens and after certain scroll height
+$(document).scroll(function() {
+  var y = $(this).scrollTop();
+  var topDiv = $('#header').outerHeight( true )-10;
+  var x = $(this).width();
+  if (y > topDiv && x < 650){
+    $('#bottom-nav').show();
+  } else {
+    $('#bottom-nav').hide();
+  }
+});
+
