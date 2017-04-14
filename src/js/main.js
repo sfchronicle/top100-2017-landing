@@ -1,5 +1,4 @@
 require("./lib/social"); //Do not delete
-var awesome = require("awesomplete");
 
 
 // function to find minimum
@@ -11,29 +10,54 @@ Array.prototype.min = function() {
 
 // search bar code -------------------------------------------------------------
 
-$("#searchrestaurants").bind("input propertychange", function (evt) {
-  console.log($("#searchrestaurants").val());
-  console.log($("#restaurantlist").find('option:selected').attr('id'));
+// searchbar code
+$("#searchrestaurants").bind("input propertychange", function () {
+  var filter = $(this).val().toLowerCase().replace(/ /g,'');
+  console.log(filter);
+  var class_match = 0;
+  var count = 0;
+
+  var button_list = document.getElementsByClassName("button");
+  for (var i=0; i<button_list.length; i++) {
+    button_list[i].classList.remove("selected");
+  };
+  if (filter == "") {
+    document.getElementById("showall").classList.add("selected");
+  }
+
+  selCuisine.selectedIndex = 0;
+  selNeighborhoods.selectedIndex = 0;
+  selNoise.selectedIndex = 0;
+  selPrice.selectedIndex = 0;
+
+  $(".restaurant").filter(function() {
+
+    var classes = this.className.split(" ");
+    for (var i=0; i< classes.length; i++) {
+
+      var current_class = classes[i].toLowerCase();
+      if ( current_class.match(filter)) {
+        class_match = class_match + 1;
+      }
+    }
+    if (class_match > 0) {
+      $(this).addClass("active");
+      count+=1;
+    } else {
+      $(this).removeClass("active");
+    }
+    class_match = 0;
+
+  });
+
+  // display text for empty search results
+  if (count > 0) {
+    document.getElementById('search-noresults').classList.add("hide");
+  } else {
+    document.getElementById('search-noresults').classList.remove("hide");
+  }
+
 });
-
-$("#restaurantlist").change(function(){
-  console.log($("#restaurantlist").find('option:selected').attr('id'));
-})
-
-// document.querySelector('#searchrestaurants').addEventListener('awesomplete-select', function(evt){
-//   console.log("got here and selected a thing");
-//   console.log(this.value);
-//   console.log(evt);
-//   console.log(this.getAttribute("id"));
-// })
-
-// console.log(document.getElementById('searchrestaurants'));
-// var input = document.getElementById("searchrestaurants");
-// new Awesomplete(input, {list: "#restaurantlist"});
-//
-// input.addEventListener('awesomplete-selectcomplete',function(){
-//   alert(this.value);
-// });
 
 // check for log on information ------------------------------------------------
 var edbId;
@@ -106,7 +130,7 @@ for(var i = 0; i < cuisines.length; i++) {
     selCuisine.appendChild(opt);
 }
 $('#select-cuisine').on('change', function(){
-    $('body,html').animate({ scrollTop: $('#restaurants').position().top },500); 
+    $('body,html').animate({ scrollTop: $('#restaurants').position().top },500);
 });
 
 // neighborhoods drop-down ------------------
@@ -297,4 +321,3 @@ $(document).scroll(function() {
     $('#bottom-nav').hide();
   }
 });
-

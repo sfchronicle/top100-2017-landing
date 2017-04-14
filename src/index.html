@@ -28,19 +28,13 @@
         </div>
       </div>
 
-    
+
       <div id="search" class="search-container">
         <span class="search"><i class="fa fa-search" aria-hidden="true"></i></span>
-        <input class="input awesomeplete" list="restaurantlist" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...'></input>
-        <datalist id="restaurantlist">
-          <% json.info.forEach(function(r) { %>
-            <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
-          	<option id="select<%=restaurantID%>"><%= r.Name %> | <%= r.Cuisine %> | <%= r.Region %> | <%= r.SubRegion %> | <a href="tel:<%= r.Phone %>"><%= r.Phone %></a> </option>
-          <% }); %>
-        </datalist>
+        <input class="input" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...'></input>
       </div>
       <div class="filters-container">
-        
+
         <div class="dropdown-container" id="choose-neighborhood">
           <select name="select" id="select-neighborhood">
             <option value='all' class="option">Neighborhoods</option>
@@ -74,7 +68,8 @@
         <div class="button" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
         <div class="button" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
 
-        
+        <div class="button" id="showall"><i class="fa fa-check-square" aria-hidden="true"></i>Show all</div>
+
         <div class="button" id="nearme"><a class="link-button" href="./map/index.html" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Near me</a></div>
 
         <div class="button" id="mylist"><a class="link-button" href="./my-list/index.html" target="_blank"><i class="fa fa-star" aria-hidden="true"></i>My list</a></div>
@@ -104,7 +99,7 @@
         <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
         <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
         <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
-        <div class="restaurant <%=cuisines%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
+        <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
           <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
           <div class="name"><%= r.Name %><span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></div>
           <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
