@@ -150,6 +150,28 @@ var selNoise = document.getElementById('select-noise');
 // cost drop-down ---------------------------
 var selPrice = document.getElementById('select-price');
 
+// function to show all restaurants ------------------------------------------------------------------
+
+function showall_function() {
+
+  var button_list = document.getElementsByClassName("button");
+  for (var i=0; i<button_list.length; i++) {
+    button_list[i].classList.remove("selected");
+  };
+
+  document.getElementById("showall").classList.add("selected");
+
+  selCuisine.selectedIndex = 0;
+  selNeighborhoods.selectedIndex = 0;
+  selNoise.selectedIndex = 0;
+  selPrice.selectedIndex = 0;
+
+  $(".restaurant").filter(function() {
+    $(this).addClass("active");
+  });
+
+}
+
 // function to assess all the filters when user picks a new one ---------------------------------------
 
 var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
@@ -157,6 +179,7 @@ var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alco
 function check_filters() {
 
   var count = 0;
+  showall_button.classList.remove("selected");
 
   $(".restaurant").filter(function() {
 
@@ -267,6 +290,14 @@ brunch_button.addEventListener("click",function() {
   toggle_brunch(this);
   $(this).toggleClass("selected");
   check_filters();
+});
+
+// event listener for "New" button
+var showall_button = document.getElementById('showall');
+showall_button.addEventListener("click",function() {
+  $(this).toggleClass("selected");
+  showall_function();
+  // check_filters();
 });
 
 // saving restaurants as favorites ------------------------------------------------
