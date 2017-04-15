@@ -161,6 +161,8 @@ function showall_function() {
 
   document.getElementById("showall").classList.add("selected");
 
+  document.getElementById('searchrestaurants').value = "";
+
   selCuisine.selectedIndex = 0;
   selNeighborhoods.selectedIndex = 0;
   selNoise.selectedIndex = 0;
@@ -177,6 +179,8 @@ function showall_function() {
 var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
 
 function check_filters() {
+
+  document.getElementById('searchrestaurants').value = "";
 
   var count = 0;
   showall_button.classList.remove("selected");
