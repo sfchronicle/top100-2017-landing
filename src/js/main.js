@@ -12,6 +12,9 @@ var count = 100;
 // defining function for looking at multiple elements
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 
+// how long to wait before saving
+var timeTimeout = 5000;
+
 // search bar code -------------------------------------------------------------
 
 // searchbar code
@@ -208,7 +211,7 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
 
     // save new data
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveNewData(),5000);
+    saveTimer = setTimeout(saveNewData(),timeTimeout);
   });
 
 });
@@ -235,7 +238,7 @@ qsa(".check-restaurant").forEach(function(restaurant,index) {
 
     // save new data
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveNewData(),5000);
+    saveTimer = setTimeout(saveNewData(),timeTimeout);
   });
 
 });
@@ -302,6 +305,46 @@ function showall_function() {
 
 }
 
+// function to show "my list" restaurants -------------------------------------------------------------
+
+function mylist_function(list) {
+
+  var listID = list.getAttribute("id");
+  console.log(listID);
+  if (listID == "mylist-starred") {
+    var prefix = "save";
+  } else {
+    var prefix = "check";
+  }
+  var button_list = document.getElementsByClassName("button");
+  for (var i=0; i<button_list.length; i++) {
+    button_list[i].classList.remove("selected");
+  };
+
+  document.getElementById(listID).classList.add("selected");
+
+  document.getElementById('searchrestaurants').value = "";
+  document.getElementById('brunch').value = "all";
+  document.getElementById('new').value = "all";
+
+  selCuisine.selectedIndex = 0;
+  selNeighborhoods.selectedIndex = 0;
+  selNoise.selectedIndex = 0;
+  selPrice.selectedIndex = 0;
+
+  $(".restaurant").filter(function() {
+    var thisID = this.getAttribute("id");
+
+    if (restaurantList.indexOf(prefix+thisID) > -1) {
+      $(this).addClass("active");
+    } else {
+      $(this).removeClass("active");
+    }
+  });
+  document.getElementById('count-results').classList.add("hide");
+
+}
+
 // function to assess all the filters when user picks a new one ---------------------------------------
 
 var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
@@ -312,6 +355,8 @@ function check_filters() {
 
   count = 0;
   showall_button.classList.remove("selected");
+  mylist_starred_button.classList.remove("selected");
+  mylist_checked_button.classList.remove("selected");
 
   $(".restaurant").filter(function() {
 
@@ -446,6 +491,25 @@ var showall_button = document.getElementById('showall');
 showall_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   showall_function();
+  console.log(count);
+  // check_filters();
+});
+
+
+// event listener for "My List" button
+var mylist_starred_button = document.getElementById('mylist-starred');
+mylist_starred_button.addEventListener("click",function() {
+  $(this).toggleClass("selected");
+  mylist_function(this);
+  console.log(count);
+  // check_filters();
+});
+
+// event listener for "My List" button
+var mylist_checked_button = document.getElementById('mylist-checked');
+mylist_checked_button.addEventListener("click",function() {
+  $(this).toggleClass("selected");
+  mylist_function(this);
   console.log(count);
   // check_filters();
 });
