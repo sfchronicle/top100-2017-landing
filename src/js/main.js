@@ -74,6 +74,7 @@ $("#searchrestaurants").bind("input propertychange", function () {
 // temporary code for testing ---------------------------
 var edbId = "11220453";
 var restaurantList;
+var saveTimer;
 
 function setCheckUser(delay, repetitions, success, error) {
   if (edbId) {
@@ -144,18 +145,21 @@ function getData() {
       console.log("success");
       savedData = data;
       restaurantList = savedData;
-      setStars();
+      setIcons();
       console.log(savedData);
     }
   });
 }
 
-// set stars on load for a particular user
-function setStars() {
+// set stars and checks on load for a particular user
+function setIcons() {
   savedData.forEach(function(saveID){
     var elem = document.getElementById(saveID);
     if ($("i", elem).hasClass("fa-star-o")) {
       $("i", elem).toggleClass("fa-star-o fa-star");
+    }
+    if ($("i", elem).hasClass("fa-square-o")) {
+      $("i", elem).toggleClass("fa-square-o fa-check-square-o");
     }
     // $("i", elem).toggleClass("fa-star-o fa-star");
   });
@@ -165,6 +169,22 @@ function setStars() {
 var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
 
 // saving restaurants as favorites ------------------------------------------------
+
+function saveNewData() {
+  var newSavedData = {edbId:edbId,restaurants:restaurantList};
+  console.log("SENDING DATA ");
+  console.log(JSON.stringify(newSavedData));
+  $.ajax({
+      method: "POST",
+      data: JSON.stringify(newSavedData),
+      contentType: "application/json",
+      success: function(msg) { console.log("success"); },
+      error: function(msg) { console.log("fail"); },
+      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
+    });
+  //   return false;
+  // });
+}
 
 qsa(".save-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
@@ -187,20 +207,35 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
     }
 
     // save new data
-    // restaurantList = [];
-    var newSavedData = {edbId:edbId,restaurants:restaurantList};
-    console.log("SENDING DATA ");
-    // savedData.push()
-    console.log(JSON.stringify(newSavedData));
-    $.ajax({
-      method: "POST",
-      data: JSON.stringify(newSavedData),
-      contentType: "application/json",
-      success: function(msg) { console.log("success"); },
-      error: function(msg) { console.log("fail"); },
-      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
-    });
-    return false;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveNewData(),5000);
+  });
+
+});
+
+qsa(".check-restaurant").forEach(function(restaurant,index) {
+  restaurant.addEventListener("click", function(e) {
+    console.log(restaurant.id);
+    $("i", this).toggleClass("fa-square-o fa-check-square-o");
+
+    console.log(savedData);
+    console.log(restaurantList);
+
+    // are we adding or removing the restaurant from the list?
+    if(  $("i", this).hasClass("fa-check-square-o") ) {
+      console.log("we do not have this restaurant yet");
+      restaurantList.push(restaurant.id);
+      console.log(restaurantList);
+    } else {
+      console.log("we need to remove this restaurant")
+      var index = restaurantList.indexOf(restaurant.id);
+      restaurantList.splice(index,1);
+      console.log(restaurantList);
+    }
+
+    // save new data
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveNewData(),5000);
   });
 
 });
