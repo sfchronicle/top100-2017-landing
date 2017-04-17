@@ -9,6 +9,9 @@ Array.prototype.min = function() {
 // variable to keep track of number of restaurants displayed
 var count = 100;
 
+// defining function for looking at multiple elements
+var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+
 // search bar code -------------------------------------------------------------
 
 // searchbar code
@@ -66,10 +69,11 @@ $("#searchrestaurants").bind("input propertychange", function () {
 
 });
 
-// check for log on information ------------------------------------------------
+// check for log on information on load ------------------------------------------------
 
 // temporary code for testing ---------------------------
 var edbId = "11220453";
+var restaurantList;
 
 function setCheckUser(delay, repetitions, success, error) {
   if (edbId) {
@@ -110,10 +114,13 @@ function setCheckUser(delay, repetitions, success, error) {
 // }
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+// response if a user is not logged in
 function errorCallBack() {
   console.log("error");
   $("#nouser").removeClass("hidden");
 }
+
+// response if a user is logged in
 function successCallBack(identity) {
   console.log("success");
   // edbId = identity.edbId;
@@ -123,8 +130,6 @@ function successCallBack(identity) {
   getData();
 }
 
-var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
-
 // retreive data
 var savedData;
 function getData() {
@@ -132,11 +137,73 @@ function getData() {
     method: "GET",
     dataType: "json",
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
-    error: function(msg) { console.log("fail"); },
-    success: function(data) { console.log("success"); savedData = data; console.log(savedData);}
+    error: function(msg) {
+      console.log("fail");
+    },
+    success: function(data) {
+      console.log("success");
+      savedData = data;
+      restaurantList = savedData;
+      setStars();
+      console.log(savedData);
+    }
   });
 }
 
+// set stars on load for a particular user
+function setStars() {
+  savedData.forEach(function(saveID){
+    var elem = document.getElementById(saveID);
+    if ($("i", elem).hasClass("fa-star-o")) {
+      $("i", elem).toggleClass("fa-star-o fa-star");
+    }
+    // $("i", elem).toggleClass("fa-star-o fa-star");
+  });
+}
+
+// check to see if a user is logged on on load
+var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
+
+// saving restaurants as favorites ------------------------------------------------
+
+qsa(".save-restaurant").forEach(function(restaurant,index) {
+  restaurant.addEventListener("click", function(e) {
+    console.log(restaurant.id);
+    $("i", this).toggleClass("fa-star-o fa-star");
+
+    console.log(savedData);
+    console.log(restaurantList);
+
+    // are we adding or removing the restaurant from the list?
+    if(  $("i", this).hasClass("fa-star") ) {
+      console.log("we do not have this restaurant yet");
+      restaurantList.push(restaurant.id);
+      console.log(restaurantList);
+    } else {
+      console.log("we need to remove this restaurant")
+      var index = restaurantList.indexOf(restaurant.id);
+      restaurantList.splice(index,1);
+      console.log(restaurantList);
+    }
+
+    // save new data
+    // restaurantList = [];
+    var newSavedData = {edbId:edbId,restaurants:restaurantList};
+    console.log("SENDING DATA ");
+    // savedData.push()
+    console.log(JSON.stringify(newSavedData));
+    $.ajax({
+      method: "POST",
+      data: JSON.stringify(newSavedData),
+      contentType: "application/json",
+      success: function(msg) { console.log("success"); },
+      error: function(msg) { console.log("fail"); },
+      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
+    });
+    return false;
+  });
+
+});
 
 
 // setting up drop-down menus -------------------------------------------------
@@ -348,41 +415,7 @@ showall_button.addEventListener("click",function() {
   // check_filters();
 });
 
-// saving restaurants as favorites ------------------------------------------------
-
-if (savedData) {
-  var restaurantList = savedData;
-} else {
-  var restaurantList = [];
-}
-
-var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
-qsa(".save-restaurant").forEach(function(restaurant,index) {
-  restaurant.addEventListener("click", function(e) {
-    console.log(restaurant.id);
-    $("i", this).toggleClass("fa-star-o fa-star");
-
-
-    // save new data
-    restaurantList.push(restaurant.id);
-    var newSavedData = {edbId:edbId,restaurants:restaurantList};
-    console.log("SENDING DATA ");
-    // savedData.push()
-    console.log(JSON.stringify(newSavedData));
-    $.ajax({
-      method: "POST",
-      data: JSON.stringify(newSavedData),
-      contentType: "application/json",
-      success: function(msg) { console.log("success"); },
-      error: function(msg) { console.log("fail"); },
-      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
-    });
-    return false;
-
-
-  });
-
-});
+// navigation controls ---------------------------------------------------------
 
 // filter button on mobile scrolls to top
 $('#filter-btn').on('click', function(){
