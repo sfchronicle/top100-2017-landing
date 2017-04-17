@@ -6,7 +6,8 @@ Array.prototype.min = function() {
   return Math.min.apply(null, this);
 };
 
-//
+// variable to keep track of number of restaurants displayed
+var count = 100;
 
 // search bar code -------------------------------------------------------------
 
@@ -15,7 +16,7 @@ $("#searchrestaurants").bind("input propertychange", function () {
   var filter = $(this).val().toLowerCase().replace(/ /g,'');
   console.log(filter);
   var class_match = 0;
-  var count = 0;
+  count = 0;
 
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
@@ -174,6 +175,8 @@ var selPrice = document.getElementById('select-price');
 
 function showall_function() {
 
+  count = 100;
+
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
     button_list[i].classList.remove("selected");
@@ -182,6 +185,8 @@ function showall_function() {
   document.getElementById("showall").classList.add("selected");
 
   document.getElementById('searchrestaurants').value = "";
+  document.getElementById('brunch').value = "all";
+  document.getElementById('new').value = "all";
 
   selCuisine.selectedIndex = 0;
   selNeighborhoods.selectedIndex = 0;
@@ -203,7 +208,7 @@ function check_filters() {
 
   document.getElementById('searchrestaurants').value = "";
 
-  var count = 0;
+  count = 0;
   showall_button.classList.remove("selected");
 
   $(".restaurant").filter(function() {
@@ -255,14 +260,12 @@ function check_filters() {
 
     // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
-    console.log("flag min is:");
-    console.log(flag_min);
 
     // show it if yes
     if (flag_min == 1){
-      console.log($(this).classList);
       $(this).addClass("active");
       count += 1;
+      console.log(count);
     } else {
       $(this).removeClass("active");
     }
@@ -270,6 +273,8 @@ function check_filters() {
   });
 
   // display text for empty search results
+  console.log("count = ");
+  console.log(count);
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
     document.getElementById('count-results').classList.remove("hide");
@@ -291,21 +296,25 @@ function check_filters() {
 // event listener for cuisine drop down
 selCuisine.addEventListener("change",function(){
   check_filters();
+  console.log(count);
 });
 
 // event listener for neighborhoods drop down
 selNeighborhoods.addEventListener("change",function(){
   check_filters();
+  console.log(count);
 });
 
 // event listener for noise drop down
 selNoise.addEventListener("change",function(){
   check_filters();
+  console.log(count);
 });
 
 // event listener for prices drop down
 selPrice.addEventListener("change",function(){
   check_filters();
+  console.log(count);
 });
 
 // event listener for "New" button
@@ -316,6 +325,7 @@ new_button.addEventListener("click",function() {
   toggle_new(this);
   $(this).toggleClass("selected");
   check_filters();
+  console.log(count);
 });
 
 // event listener for "Brunch" button
@@ -326,6 +336,7 @@ brunch_button.addEventListener("click",function() {
   toggle_brunch(this);
   $(this).toggleClass("selected");
   check_filters();
+  console.log(count);
 });
 
 // event listener for "New" button
@@ -333,6 +344,7 @@ var showall_button = document.getElementById('showall');
 showall_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   showall_function();
+  console.log(count);
   // check_filters();
 });
 
