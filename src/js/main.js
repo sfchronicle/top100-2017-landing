@@ -53,53 +53,73 @@ $("#searchrestaurants").bind("input propertychange", function () {
   // display text for empty search results
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
+    document.getElementById('count-results').classList.remove("hide");
+    document.getElementById('count-results').innerHTML = "There are "+count+" results.";
   } else {
     document.getElementById('search-noresults').classList.remove("hide");
+    document.getElementById('count-results').classList.add("hide");
+  }
+  if (count == 100) {
+    document.getElementById('count-results').classList.add("hide");
   }
 
 });
 
 // check for log on information ------------------------------------------------
-var edbId;
+
+// temporary code for testing ---------------------------
+var edbId = "11220453";
+
 function setCheckUser(delay, repetitions, success, error) {
-  var x = 0;
-  var intervalID = window.setInterval(function () {
-    // loop while waiting for syncPaymeterSdk to load
-    if ( window.syncPaymeterSdk ) {
-      window.clearInterval( intervalID );
-      var a = window.syncPaymeterSdk;
-      a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
-       // set callback for completion of authorization
-        if ( treg.identity.edbId ) {
-          if ( success && typeof(success) === "function" ) {
-            success(treg.identity);
-          }
-        } else {
-          if ( error && typeof(error) === "function" ) {
-            error();
-          }
-        }
-      });
-    } else if ( ++x === repetitions ) {
-      window.clearInterval( intervalID );
-      if ( error && typeof(error) === "function" ) {
-        error();
-      }
-    }
-  }, delay );
+  if (edbId) {
+    success(edbId);
+  } else {
+    error();
+  }
 }
+
+// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// var edbId;
+// function setCheckUser(delay, repetitions, success, error) {
+//   var x = 0;
+//   var intervalID = window.setInterval(function () {
+//     // loop while waiting for syncPaymeterSdk to load
+//     if ( window.syncPaymeterSdk ) {
+//       window.clearInterval( intervalID );
+//       var a = window.syncPaymeterSdk;
+//       a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
+//        // set callback for completion of authorization
+//         if ( treg.identity.edbId ) {
+//           if ( success && typeof(success) === "function" ) {
+//             success(treg.identity);
+//           }
+//         } else {
+//           if ( error && typeof(error) === "function" ) {
+//             error();
+//           }
+//         }
+//       });
+//     } else if ( ++x === repetitions ) {
+//       window.clearInterval( intervalID );
+//       if ( error && typeof(error) === "function" ) {
+//         error();
+//       }
+//     }
+//   }, delay );
+// }
+// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 function errorCallBack() {
   console.log("error");
   $("#nouser").removeClass("hidden");
 }
 function successCallBack(identity) {
   console.log("success");
-  edbId = identity.edbId;
+  // edbId = identity.edbId;
   console.log(edbId);
   // $("#userwelcome").html("Welcome " + identity.displayName);
   // $("#founduser").removeClass("hidden");
   getData();
-//  console.log(savedData);
 }
 
 var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
@@ -171,6 +191,7 @@ function showall_function() {
   $(".restaurant").filter(function() {
     $(this).addClass("active");
   });
+  document.getElementById('count-results').classList.add("hide");
 
 }
 
@@ -234,9 +255,12 @@ function check_filters() {
 
     // see if the restaurant satisfies all conditions set by user
     flag_min = [cuisine_flag, neighborhood_flag, new_flag, brunch_flag, noise_flag, price_flag, alcohol_flag].min();
+    console.log("flag min is:");
+    console.log(flag_min);
 
     // show it if yes
     if (flag_min == 1){
+      console.log($(this).classList);
       $(this).addClass("active");
       count += 1;
     } else {
@@ -248,8 +272,16 @@ function check_filters() {
   // display text for empty search results
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
+    document.getElementById('count-results').classList.remove("hide");
+    document.getElementById('count-results').innerHTML = "There are "+count+" results.";
   } else {
     document.getElementById('search-noresults').classList.remove("hide");
+    document.getElementById('count-results').classList.add("hide");
+  }
+  if (count == 100) {
+    console.log("we are showing all 100");
+    showall_button.classList.add("selected");
+    document.getElementById('count-results').classList.add("hide");
   }
 
 };
