@@ -113,10 +113,14 @@
         </div>
       <% }); %>
       <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search filters.</div>
-    </div>
+
+      <%= t.include("partials/_full_footer.html") %>
+
     </div>
 
-    <%= t.include("partials/_full_footer.html") %>
+
+    </div>
+
 
     <script>
       (function (exports) {
