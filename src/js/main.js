@@ -260,14 +260,23 @@ $('#select-cuisine').on('change', function(){
 });
 
 // neighborhoods drop-down ------------------
-var neighborhoods = ["Berkeley","Burlingame","Castro","Chinatown","Civic Center","Cow Hollow","Daly City",
-"Embarcadero","Fairfax","Financial District","Hayes Valley","Healdsburg","Los Gatos","Lower Pacific Heights","Marina","Mid-Market","Mission","Napa","Nob Hill","Noe Valley","NoPa","North Beach","Oakland","Pacific Heights","Port Costa","Presidio","Russian Hill","Sausalito","SoMa","St. Helena","Tenderloin","The Richmond","Union Square","Western Addition","Yountville"];
-var selNeighborhoods = document.getElementById('select-neighborhood');
-for(var i = 0; i < neighborhoods.length; i++) {
+var regions = ["East Bay","San Francisco","North Bay","South Bay"];
+var neighborhoods = {"East Bay":["Berkeley","Oakland","Port Costa"], "North Bay":["Yountville","Napa","Sausalito","St. Helena","Healdsburg","Fairfax"], "San Francisco":["Castro","Chinatown","Civic Center","Cow Hollow","Embarcadero","Financial District","Hayes Valley","Lower Pacific Heights","Marina","Mid-Market","Mission","Nob Hill","Noe Valley","NoPa","North Beach","Pacific Heights","Presidio","Russian Hill","SoMa","Tenderloin","The Richmond","Union Square","Western Addition"], "South Bay":["Los Gatos","Burlingame","Daly City"]};
+
+var selNeighborhoods = document.getElementById("select-neighborhood");
+for (var j = 0; j< regions.length; j++) {
+  var opt = document.createElement('optgroup');
+  opt.className += "optionGroup";
+  opt.label = regions[j];
+  opt.value = regions[j].toLowerCase().replace(/ /g,'');
+  selNeighborhoods.appendChild(opt);
+  for (var i = 0; i < neighborhoods[regions[j]].length; i++) {
     var opt = document.createElement('option');
-    opt.innerHTML = neighborhoods[i];
-    opt.value = neighborhoods[i].toLowerCase().replace(/ /g,'');
+    opt.className += "optionChild";
+    opt.innerHTML = neighborhoods[regions[j]][i];
+    opt.value = neighborhoods[regions[j]][i].toLowerCase().replace(/ /g,'');
     selNeighborhoods.appendChild(opt);
+  }
 }
 
 // noise drop-down ---------------------------
