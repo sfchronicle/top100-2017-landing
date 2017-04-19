@@ -1,4 +1,5 @@
 require("./lib/social"); //Do not delete
+require("./lib/random"); //Do not delete
 
 
 // function to find minimum

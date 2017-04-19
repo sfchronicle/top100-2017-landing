@@ -142,7 +142,7 @@ body {
 }
 
 
-#restaurants{
+#restaurants-wrap{
 	background:#e5e6ea;
 	.display-flex;
 	padding:1em 0 0 1em;
@@ -150,8 +150,8 @@ body {
 	width:100%;
 	.justify-content(initial);
 
-	@media @width1200{
-		padding:0;
+	@media @tablet{
+		padding:15px;
 	}
 
 	@media @mobile{
@@ -160,9 +160,9 @@ body {
 
 	.restaurant{
 
-		.flex(0 0 22%);
+		.flex(0 0 24%);
 		background:white;
-		margin:10px;
+		margin:10px 4px;
 		display:none;
 		padding: 10px;
 
@@ -179,7 +179,11 @@ body {
 		}
 
 		@media @width1200{
-		.flex(1 0 30%);
+		.flex(0 0 31%);
+		}
+
+		@media @width950{
+		.flex(0 1 48%);
 		}
 
 		@media @tablet{
@@ -187,7 +191,7 @@ body {
 		}
 
 		@media @width650 {
-			.flex(0 1 46%);
+			.flex(1 0 46%);
 	    margin: 1em 10px;
 		}
 

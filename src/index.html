@@ -98,34 +98,35 @@
 
     </div>
     <div id="restaurants">
-    <div class="count-results hide" id="count-results">There are 100 results.</div>
-      <% json.info.forEach(function(r) { %>
-        <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
-        <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
-        <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
-        <% var neighborhoods0 = r.SubRegion.toLowerCase().replace(",","/").replace(/ /g,''); %>
-        <% var neighborhoods = neighborhoods0.replace(/\//g," "); %>
-        <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
-        <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
-        <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
-        <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
-        <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
-        <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
+      <div class="count-results hide" id="count-results">There are 100 results.</div>
+      <div id="restaurants-wrap">
+        <% json.info.forEach(function(r) { %>
+          <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
+          <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
+          <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
+          <% var neighborhoods0 = r.SubRegion.toLowerCase().replace(",","/").replace(/ /g,''); %>
+          <% var neighborhoods = neighborhoods0.replace(/\//g," "); %>
+          <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
+          <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
+          <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
+          <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
+          <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
+          <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
-          <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>"><% } %>
-              <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
-            </a>
-            <div class="name clearfix">
-              <div class="rname"><%= r.Name %></div>
-              <div class="favorites">
-                <span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></span></i>
-                <span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>"><% } %>
+                <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
+              </a>
+              <div class="name clearfix">
+                <div class="rname"><%= r.Name %></div>
+                <div class="favorites">
+                  <span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></span></i>
+                  <span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                </div>
               </div>
-            </div>
-            <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
-
-        </div>
-      <% }); %>
+              <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
+          </div>
+        <% }); %>
+      </div>
       <div class="count-results hide" id="count-results">100 result(s)</div>
       <div class="search-noresults hide" id="search-noresults">No restaurants match your search. Try new search filters.</div>
 
