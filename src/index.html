@@ -53,6 +53,7 @@
             <option value='twodollar' class="option">$$</option>
             <option value='threedollar' class="option">$$$</option>
             <option value='fourdollar' class="option">$$$$</option>
+            <option value='potofgold' class="option">Pot of GOLD</option>
           </select>
         </div>
         <div class="dropdown-container" id="choose-noise">
@@ -101,10 +102,11 @@
         <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
         <% var neighborhoods = r.SubRegion.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
         <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
+        <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
         <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
         <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
         <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
-        <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=noise %> active" id="<%=restaurantID%>">
+        <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
           <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
           <div class="name"><%= r.Name %><span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></span></i><span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span></div>
           <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
