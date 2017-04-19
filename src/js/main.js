@@ -144,6 +144,7 @@ function getData() {
     dataType: "json",
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
     error: function(msg) {
+      restaurantList = [];
       console.log("fail");
     },
     success: function(data) {
@@ -514,6 +515,10 @@ brunch_button.addEventListener("click",function() {
 // event listener for "New" button
 var showall_button = document.getElementById('showall');
 showall_button.addEventListener("click",function() {
+  selNeighborhoods.classList.remove("active");
+  selPrice.classList.remove("active");
+  selNoise.classList.remove("active");
+  selCuisine.classList.remove("active");
   $(this).toggleClass("selected");
   showall_function();
 });
