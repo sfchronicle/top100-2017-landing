@@ -6,6 +6,13 @@ body {
 
 .count-results {
 	font-style: italic;
+	.flex(0 1 100%);
+	margin:1em;
+	font-family:@title;
+
+	@media @width650{
+		text-align:center;
+	}
 	&.hide {
 		display: none;
 	}
@@ -21,7 +28,12 @@ body {
 
 #left-nav{
 	.flex(0 0 350px);
+
+	.fa{
+		color:@main;
+	}
 }
+
 
 .sf-logo{
 	max-width:180px;
@@ -262,9 +274,11 @@ body {
 }
 
 #search-noresults {
-	padding-top: 50px;
-	text-align: center;
-	font-style: italic;
+  margin: 15%;
+  font-style: italic;
+  text-align: center;
+  width: 100%;
+  font-family: @title;
 	&.hide {
 		display: none;
 	}
@@ -372,5 +386,4 @@ body {
   display: block;
   font-size: 14px;
   margin-top: 5px;
-
 }
