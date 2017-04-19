@@ -13,5 +13,7 @@
   "sheets": ["1RIDzCAjN4O5FYsS1ogGWcfwOPTRtTkclizth3vl4Bng"],
   "docsID":"1hOrfaxHtrZ-TlXKD-35MKshKTMiJvAgU5OoNK5AnBwU",
   "production": false,
-  "embedded": false
+  "embedded": false,
+  "debug": false,
+  "staging_path":"test-proj/top2017"
 }
