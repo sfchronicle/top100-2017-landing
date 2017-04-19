@@ -129,7 +129,7 @@ function errorCallBack() {
 // response if a user is logged in
 function successCallBack(identity) {
   console.log("success");
-  // edbId = identity.edbId;
+  edbId = identity.edbId;
   console.log(edbId);
   // $("#userwelcome").html("Welcome " + identity.displayName);
   // $("#founduser").removeClass("hidden");
