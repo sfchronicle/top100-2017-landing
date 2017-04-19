@@ -60,7 +60,7 @@ $("#searchrestaurants").bind("input propertychange", function () {
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
     document.getElementById('count-results').classList.remove("hide");
-    document.getElementById('count-results').innerHTML = "There are "+count+" results.";
+    document.getElementById('count-results').innerHTML = count+" result(s)";
   } else {
     document.getElementById('search-noresults').classList.remove("hide");
     document.getElementById('count-results').classList.add("hide");
@@ -434,7 +434,7 @@ function check_filters() {
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
     document.getElementById('count-results').classList.remove("hide");
-    document.getElementById('count-results').innerHTML = "There are "+count+" results.";
+    document.getElementById('count-results').innerHTML = count+" result(s)";
   } else {
     document.getElementById('search-noresults').classList.remove("hide");
     document.getElementById('count-results').classList.add("hide");
