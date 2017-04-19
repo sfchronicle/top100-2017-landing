@@ -113,9 +113,8 @@
         <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
           <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>"><% } else { %><a href="test-proj/top2017/<%= r.slug %>"><% } %>
-
-          
-            <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
+              <img src="http://ww2.hdnux.com/photos/54/11/64/<%= photos[0] %>/3/premium_landscape.jpg">
+            </a>
             <div class="name clearfix">
               <div class="rname"><%= r.Name %></div>
               <div class="favorites">
@@ -124,7 +123,7 @@
               </div>
             </div>
             <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
-          </a>
+          
         </div>
       <% }); %>
       <div class="count-results hide" id="count-results">100 result(s)</div>
