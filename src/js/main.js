@@ -254,7 +254,11 @@ for(var i = 0; i < cuisines.length; i++) {
     opt.value = cuisines[i].toLowerCase().replace(/ /g,'');
     selCuisine.appendChild(opt);
 }
-$('.filter').on('change', function(){
+$('.dropdown-container').on('change', function(){
+    $('body,html').animate({ scrollTop: $('#restaurants').position().top },300);
+});
+
+$('.filter').on('click', function(){
     $('body,html').animate({ scrollTop: $('#restaurants').position().top },300);
 });
 
