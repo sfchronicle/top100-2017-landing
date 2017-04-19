@@ -255,8 +255,8 @@ for(var i = 0; i < cuisines.length; i++) {
     opt.value = cuisines[i].toLowerCase().replace(/ /g,'');
     selCuisine.appendChild(opt);
 }
-$('#select-cuisine').on('change', function(){
-    $('body,html').animate({ scrollTop: $('#restaurants').position().top },500);
+$('.filter').on('change', function(){
+    $('body,html').animate({ scrollTop: $('#restaurants').position().top },300);
 });
 
 // neighborhoods drop-down ------------------
