@@ -172,13 +172,22 @@ body {
 	font-family:@title;
 	.display-flex;
 	.justify-content(space-between);
+
+	.rname{
+		.flex(1 0);
+	}
+
+	.favorites{
+		.flex(0 0 54px);
+
+	}
 }
 .info{
 	font-size:0.85em;
 }
 
 .save-restaurant, .check-restaurant {
-	padding-left: 15px;
+	padding-left: 10px;
 	cursor: pointer;
 }
 
@@ -291,6 +300,7 @@ body {
 	position:fixed;
 	width:100%;
 	display:none;
+	z-index:2017;
 	background:white;
 	bottom:0;
 	-webkit-box-shadow: 0 0 6px 0 #696969;
@@ -356,4 +366,11 @@ body {
 	.optionChild {
 		color: @light-gray;
 	}
+}
+
+.byline{
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+
 }
