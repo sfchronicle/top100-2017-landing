@@ -73,48 +73,51 @@ $("#searchrestaurants").bind("input propertychange", function () {
 
 // check for log on information on load ------------------------------------------------
 
+// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // temporary code for testing ---------------------------
-var edbId = "11220453";
-var restaurantList;
-var saveTimer;
-
-function setCheckUser(delay, repetitions, success, error) {
-  if (edbId) {
-    success(edbId);
-  } else {
-    error();
-  }
-}
+// var edbId = "11220453";
+// var restaurantList;
+// var saveTimer;
+//
+// function setCheckUser(delay, repetitions, success, error) {
+//   if (edbId) {
+//     success(edbId);
+//   } else {
+//     error();
+//   }
+// }
 
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// var edbId;
-// function setCheckUser(delay, repetitions, success, error) {
-//   var x = 0;
-//   var intervalID = window.setInterval(function () {
-//     // loop while waiting for syncPaymeterSdk to load
-//     if ( window.syncPaymeterSdk ) {
-//       window.clearInterval( intervalID );
-//       var a = window.syncPaymeterSdk;
-//       a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
-//        // set callback for completion of authorization
-//         if ( treg.identity.edbId ) {
-//           if ( success && typeof(success) === "function" ) {
-//             success(treg.identity);
-//           }
-//         } else {
-//           if ( error && typeof(error) === "function" ) {
-//             error();
-//           }
-//         }
-//       });
-//     } else if ( ++x === repetitions ) {
-//       window.clearInterval( intervalID );
-//       if ( error && typeof(error) === "function" ) {
-//         error();
-//       }
-//     }
-//   }, delay );
-// }
+var edbId;
+var restaurantList;
+var saveTimer;
+function setCheckUser(delay, repetitions, success, error) {
+  var x = 0;
+  var intervalID = window.setInterval(function () {
+    // loop while waiting for syncPaymeterSdk to load
+    if ( window.syncPaymeterSdk ) {
+      window.clearInterval( intervalID );
+      var a = window.syncPaymeterSdk;
+      a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
+       // set callback for completion of authorization
+        if ( treg.identity.edbId ) {
+          if ( success && typeof(success) === "function" ) {
+            success(treg.identity);
+          }
+        } else {
+          if ( error && typeof(error) === "function" ) {
+            error();
+          }
+        }
+      });
+    } else if ( ++x === repetitions ) {
+      window.clearInterval( intervalID );
+      if ( error && typeof(error) === "function" ) {
+        error();
+      }
+    }
+  }, delay );
+}
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // response if a user is not logged in
