@@ -20,7 +20,6 @@ var timeTimeout = 5000;
 // searchbar code
 $("#searchrestaurants").bind("input propertychange", function () {
   var filter = $(this).val().toLowerCase().replace(/ /g,'');
-  console.log(filter);
   var class_match = 0;
   count = 0;
 
@@ -421,7 +420,6 @@ function check_filters() {
     if (flag_min == 1){
       $(this).addClass("active");
       count += 1;
-      console.log(count);
     } else {
       $(this).removeClass("active");
     }
@@ -429,8 +427,6 @@ function check_filters() {
   });
 
   // display text for empty search results
-  console.log("count = ");
-  console.log(count);
   if (count > 0) {
     document.getElementById('search-noresults').classList.add("hide");
     document.getElementById('count-results').classList.remove("hide");
@@ -440,7 +436,6 @@ function check_filters() {
     document.getElementById('count-results').classList.add("hide");
   }
   if (count == 100) {
-    console.log("we are showing all 100");
     showall_button.classList.add("selected");
     document.getElementById('count-results').classList.add("hide");
   }
@@ -450,27 +445,43 @@ function check_filters() {
 // event listeners for all the filters -------------------------------------------------
 
 // event listener for cuisine drop down
-selCuisine.addEventListener("change",function(){
+selCuisine.addEventListener("change",function(event){
+  if (event.target.value != "all") {
+    selCuisine.classList.add("active");
+  } else {
+    selCuisine.classList.remove("active");
+  }
   check_filters();
-  console.log(count);
 });
 
 // event listener for neighborhoods drop down
 selNeighborhoods.addEventListener("change",function(){
+  if (event.target.value != "all") {
+    selNeighborhoods.classList.add("active");
+  } else {
+    selNeighborhoods.classList.remove("active");
+  }
   check_filters();
-  console.log(count);
 });
 
 // event listener for noise drop down
 selNoise.addEventListener("change",function(){
+  if (event.target.value != "all") {
+    selNoise.classList.add("active");
+  } else {
+    selNoise.classList.remove("active");
+  }
   check_filters();
-  console.log(count);
 });
 
 // event listener for prices drop down
 selPrice.addEventListener("change",function(){
+  if (event.target.value != "all") {
+    selPrice.classList.add("active");
+  } else {
+    selPrice.classList.remove("active");
+  }
   check_filters();
-  console.log(count);
 });
 
 // event listener for "New" button
@@ -481,7 +492,6 @@ new_button.addEventListener("click",function() {
   toggle_new(this);
   $(this).toggleClass("selected");
   check_filters();
-  console.log(count);
 });
 
 // event listener for "Brunch" button
@@ -492,7 +502,6 @@ brunch_button.addEventListener("click",function() {
   toggle_brunch(this);
   $(this).toggleClass("selected");
   check_filters();
-  console.log(count);
 });
 
 // event listener for "New" button
@@ -500,8 +509,6 @@ var showall_button = document.getElementById('showall');
 showall_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   showall_function();
-  console.log(count);
-  // check_filters();
 });
 
 
@@ -510,8 +517,6 @@ var mylist_starred_button = document.getElementById('mylist-starred');
 mylist_starred_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   mylist_function(this);
-  console.log(count);
-  // check_filters();
 });
 
 // event listener for "My List" button
@@ -519,8 +524,6 @@ var mylist_checked_button = document.getElementById('mylist-checked');
 mylist_checked_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   mylist_function(this);
-  console.log(count);
-  // check_filters();
 });
 
 // navigation controls ---------------------------------------------------------
