@@ -20,9 +20,10 @@ body {
 
 #container{
 	.display-flex;
+	width:100%;
 
 	@media @width650{
-		.flex-direction(column);
+		display:block
 	}
 }
 
@@ -64,6 +65,7 @@ body {
     position: static;
     padding-bottom: 2em;
     width: 100%;
+    overflow:inherit;
   }
 
 	img{
@@ -143,8 +145,14 @@ body {
 #restaurants{
 	background:#e5e6ea;
 	.display-flex;
+	padding:1em 0 0 1em;
 	.flex-wrap(wrap);
+	width:100%;
 	.justify-content(initial);
+
+	@media @width1200{
+		padding:0;
+	}
 
 	@media @mobile{
 		padding:0 0 4em;
@@ -152,8 +160,7 @@ body {
 
 	.restaurant{
 
-		.flex(1 0 20%);
-		max-width:251px;
+		.flex(0 0 22%);
 		background:white;
 		margin:10px;
 		display:none;
@@ -176,14 +183,16 @@ body {
 		}
 
 		@media @tablet{
-		.flex(1 0 100%);
-		max-width:none;
-    margin: 1em 0;
+		.flex(0 1 100%);
 		}
 
 		@media @width650 {
-			.flex(1 0 46%);
+			.flex(0 1 46%);
 	    margin: 1em 10px;
+		}
+
+		@media @mobile {
+			.flex(1 0 46%);
 		}
 		&.active {
 			display: block;
