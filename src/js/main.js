@@ -1,7 +1,6 @@
 require("./lib/social"); //Do not delete
 require("./lib/random"); //Do not delete
 
-
 // function to find minimum
 Array.prototype.min = function() {
   return Math.min.apply(null, this);
@@ -75,7 +74,7 @@ $("#searchrestaurants").bind("input propertychange", function () {
 // check for log on information on load ------------------------------------------------
 
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// temporary code for testing ---------------------------
+// // temporary code for testing ---------------------------
 // var edbId = "11220453";
 // var restaurantList;
 // var saveTimer;
@@ -310,6 +309,9 @@ function showall_function() {
   document.getElementById('brunch').value = "all";
   document.getElementById('new').value = "all";
 
+  document.getElementById('no-saved-restaurants').classList.add("hide");
+  document.getElementById('no-checked-restaurants').classList.add("hide");
+
   selCuisine.selectedIndex = 0;
   selNeighborhoods.selectedIndex = 0;
   selNoise.selectedIndex = 0;
@@ -349,16 +351,30 @@ function mylist_function(list) {
   selNoise.selectedIndex = 0;
   selPrice.selectedIndex = 0;
 
+  var fav_count = 0;
   $(".restaurant").filter(function() {
     var thisID = this.getAttribute("id");
 
     if (restaurantList.indexOf(prefix+thisID) > -1) {
       $(this).addClass("active");
+      fav_count += 1;
     } else {
       $(this).removeClass("active");
     }
   });
   document.getElementById('count-results').classList.add("hide");
+  if (fav_count == 0) {
+    if (prefix == "save") {
+      document.getElementById('no-checked-restaurants').classList.add("hide");
+      document.getElementById('no-saved-restaurants').classList.remove("hide");
+    } else {
+      document.getElementById('no-saved-restaurants').classList.add("hide");
+      document.getElementById('no-checked-restaurants').classList.remove("hide");
+    }
+  } else {
+    document.getElementById('no-saved-restaurants').classList.add("hide");
+    document.getElementById('no-checked-restaurants').classList.add("hide");
+  }
 
 }
 
@@ -374,6 +390,9 @@ function check_filters() {
   showall_button.classList.remove("selected");
   mylist_starred_button.classList.remove("selected");
   mylist_checked_button.classList.remove("selected");
+
+  document.getElementById('no-saved-restaurants').classList.add("hide");
+  document.getElementById('no-checked-restaurants').classList.add("hide");
 
   $(".restaurant").filter(function() {
 
