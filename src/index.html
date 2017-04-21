@@ -22,6 +22,7 @@
         <div class="top100-logo">
          <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
          <%= t.include("partials/_social.html") %>
+         <div class="byline byline-title">By <a href="mailto:mbauer@sfchronicle.com">Michael Bauer</a></div>
         </div>
       </div>
 
@@ -62,14 +63,17 @@
           </select>
         </div>
 
-        <div class="button filter" id="new"><div class="img-icon"><img src="./assets/graphics/new.png"></div><div class="icon-text">New additions</div></div>
-        <div class="button filter" id="brunch"><div class="img-icon"><img src="./assets/graphics/brunch.png"></div>Brunch spots</div>
+        <div class="button filter" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
+
+        <div class="button filter" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
+
+        <div class="button filter" id="showall"><i class="fa fa-home" aria-hidden="true"></i>Show all</div>
+
+        <div class="button filter" id="about"><i class="fa fa-info-circle" aria-hidden="true"></i>Read more</div>
 
         <div class="button filter" id="mylist-starred"><i class="fa fa-star" aria-hidden="true"></i>My favorites</div>
 
         <div class="button filter" id="mylist-checked"><i class="fa fa-check-square-o" aria-hidden="true"></i>My list</div>
-
-        <div class="button filter" id="showall">Show all</div>
 
 
 

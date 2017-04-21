@@ -234,7 +234,7 @@ body {
 .search-container {
 	max-width: 900px;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 25px;
 	padding:0 10px;
 	text-align: center;
 
@@ -451,4 +451,23 @@ body {
 .icon-text {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.byline-title {
+	text-align: center;
+	a {
+		text-decoration: underline;
+	}
+}
+
+#mylist-checked, #mylist-starred {
+	// .fa {
+		color: @main !important;
+		border-color: @main !important;
+	// }
+	font-family: @sans-serif !important;
+	&.selected {
+		background: @main !important;
+		color: white !important;
+	}
 }
