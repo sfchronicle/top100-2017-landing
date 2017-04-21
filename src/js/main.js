@@ -267,8 +267,8 @@ $('.filter').on('click', function(){
 });
 
 // neighborhoods drop-down ------------------
-var regions = ["East Bay","San Francisco","North Bay","South Bay"];
-var neighborhoods = {"East Bay":["Berkeley","Oakland","Port Costa"], "North Bay":["Yountville","Napa","Sausalito","St. Helena","Healdsburg","Fairfax"], "San Francisco":["Castro","Chinatown","Civic Center","Cow Hollow","Embarcadero","Financial District","Hayes Valley","Lower Pacific Heights","Marina","Mid-Market","Mission","Nob Hill","Noe Valley","NoPa","North Beach","Pacific Heights","Presidio","Russian Hill","SoMa","Tenderloin","The Richmond","Union Square","Western Addition"], "South Bay":["Los Gatos","Burlingame","Daly City"]};
+var regions = ["East Bay","San Francisco","North Bay","South of SF"];
+var neighborhoods = {"East Bay":["Berkeley","Oakland","Port Costa"], "North Bay":["Yountville","Napa","Sausalito","St. Helena","Healdsburg","Fairfax"], "San Francisco":["Castro","Chinatown","Civic Center","Cow Hollow","Embarcadero","Financial District","Hayes Valley","Lower Pacific Heights","Marina","Mid-Market","Mission","Nob Hill","Noe Valley","NoPa","North Beach","Pacific Heights","Presidio","Russian Hill","SoMa","Tenderloin","The Richmond","Union Square","Western Addition"], "South of SF":["Los Gatos","Burlingame","Daly City"]};
 
 var selNeighborhoods = document.getElementById("select-neighborhood");
 for (var j = 0; j< regions.length; j++) {

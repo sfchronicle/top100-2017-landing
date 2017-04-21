@@ -31,9 +31,6 @@
         </div>
       </div>
 
-      <img src="./assets/graphics/one-dollar.png">
-
-
       <div id="search" class="search-container">
         <span class="search"><i class="fa fa-search" aria-hidden="true"></i></span>
         <input class="input" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...'></input>
@@ -53,7 +50,7 @@
         <div class="dropdown-container" id="choose-prices">
           <select name="select" id="select-price">
             <option value='all' class="option">Prices</option>
-            <option value='onedollar' class="option">$</option>
+            <option value='onedollar' class="option" style="background:url('./assets/graphics/one-dollar.png');">$</option>
             <option value='twodollar' class="option">$$</option>
             <option value='threedollar' class="option">$$$</option>
             <option value='fourdollar' class="option">$$$$</option>
@@ -71,8 +68,8 @@
           </select>
         </div>
 
-        <div class="button filter" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
-        <div class="button filter" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
+        <div class="button filter" id="new"><div class="img-icon"><img src="./assets/graphics/new.png"></div><div class="icon-text">New additions</div></div>
+        <div class="button filter" id="brunch"><div class="img-icon"><img src="./assets/graphics/brunch.png"></div>Brunch spots</div>
 
         <div class="button filter" id="mylist-starred"><i class="fa fa-star" aria-hidden="true"></i>My favorites</div>
 
