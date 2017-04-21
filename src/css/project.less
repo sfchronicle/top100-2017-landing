@@ -151,6 +151,9 @@ body {
 	.flex-wrap(wrap);
 	width:100%;
 	.justify-content(initial);
+	&.hide {
+		display: none;
+	}
 
 	@media @tablet{
 		padding:15px;
@@ -514,5 +517,8 @@ body {
 			padding-top: 30px;
 			// font-size: 16px;
 		}
+	}
+	&.hide {
+		display: none;
 	}
 }

@@ -96,7 +96,7 @@
     </div>
     <div id="restaurants">
       <div class="count-results hide" id="count-results">100 result(s)</div>
-      <div class="intro hide"><%= t.include("partials/_intro.html") %></div>
+      <div class="intro hide" id="intro-container"><%= t.include("partials/_intro.html") %></div>
       <div id="restaurants-wrap">
         <% json.info.forEach(function(r) { %>
           <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
@@ -108,7 +108,7 @@
           <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
           <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
           <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
-          <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } else { var photos = ["12596031"] } %>
+          <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } %>
           <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
             <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>"><% } %>

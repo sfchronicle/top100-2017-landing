@@ -298,6 +298,9 @@ function showall_function() {
 
   count = 100;
 
+  document.getElementById("restaurants-wrap").classList.remove("hide");
+  document.getElementById("intro-container").classList.add("hide");
+
   var button_list = document.getElementsByClassName("button");
   for (var i=0; i<button_list.length; i++) {
     button_list[i].classList.remove("selected");
@@ -324,9 +327,35 @@ function showall_function() {
 
 }
 
+// function to show introduction ----------------------------------------------------------------------
+
+function showintro_function(){
+
+  var button_list = document.getElementsByClassName("button");
+  for (var i=0; i<button_list.length; i++) {
+    button_list[i].classList.remove("selected");
+  };
+  document.getElementById("about").classList.add("selected");
+
+  document.getElementById('searchrestaurants').value = "";
+  document.getElementById('brunch').value = "all";
+  document.getElementById('new').value = "all";
+
+  selCuisine.selectedIndex = 0;
+  selNeighborhoods.selectedIndex = 0;
+  selNoise.selectedIndex = 0;
+  selPrice.selectedIndex = 0;
+
+  document.getElementById('count-results').classList.add("hide");
+
+}
+
 // function to show "my list" restaurants -------------------------------------------------------------
 
 function mylist_function(list) {
+
+  document.getElementById("restaurants-wrap").classList.remove("hide");
+  document.getElementById("intro-container").classList.add("hide");
 
   var listID = list.getAttribute("id");
   console.log(listID);
@@ -383,6 +412,10 @@ function mylist_function(list) {
 var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
 
 function check_filters() {
+
+  document.getElementById("restaurants-wrap").classList.remove("hide");
+  document.getElementById("intro-container").classList.add("hide");
+  document.getElementById("about").classList.remove("selected");
 
   document.getElementById('searchrestaurants').value = "";
 
@@ -556,6 +589,16 @@ var mylist_checked_button = document.getElementById('mylist-checked');
 mylist_checked_button.addEventListener("click",function() {
   $(this).toggleClass("selected");
   mylist_function(this);
+});
+
+// event listener for "My List" button
+var showintro_button = document.getElementById('about');
+showintro_button.addEventListener("click",function() {
+  console.log("click");
+  $(this).toggleClass("selected");
+  $("#intro-container").toggleClass("hide");
+  $("#restaurants-wrap").toggleClass("hide");
+  showintro_function(this);
 });
 
 // navigation controls ---------------------------------------------------------
