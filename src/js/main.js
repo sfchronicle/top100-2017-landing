@@ -36,6 +36,11 @@ $("#searchrestaurants").bind("input propertychange", function () {
   selNoise.selectedIndex = 0;
   selPrice.selectedIndex = 0;
 
+  selNeighborhoods.classList.remove("active");
+  selPrice.classList.remove("active");
+  selNoise.classList.remove("active");
+  selCuisine.classList.remove("active");
+
   $(".restaurant").filter(function() {
 
     var classes = this.className.split(" ");
@@ -346,6 +351,11 @@ function showintro_function(){
   selNoise.selectedIndex = 0;
   selPrice.selectedIndex = 0;
 
+  selNeighborhoods.classList.remove("active");
+  selPrice.classList.remove("active");
+  selNoise.classList.remove("active");
+  selCuisine.classList.remove("active");
+
   document.getElementById('count-results').classList.add("hide");
 
 }
@@ -379,6 +389,11 @@ function mylist_function(list) {
   selNeighborhoods.selectedIndex = 0;
   selNoise.selectedIndex = 0;
   selPrice.selectedIndex = 0;
+
+  selNeighborhoods.classList.remove("active");
+  selPrice.classList.remove("active");
+  selNoise.classList.remove("active");
+  selCuisine.classList.remove("active");
 
   var fav_count = 0;
   $(".restaurant").filter(function() {
