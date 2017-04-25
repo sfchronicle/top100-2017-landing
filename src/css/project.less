@@ -141,6 +141,7 @@ body {
 #restaurants{
 	@media @width650{
 		padding-top:1em;
+		padding-bottom: 2em;
 	}
 }
 
@@ -307,15 +308,18 @@ body {
 }
 
 #search-noresults {
-  margin: 15%;
+  margin: 5% 0 0;
+	padding: 10px;
   font-style: italic;
-  text-align: center;
+  text-align:center;
   width: 100%;
   font-family: @title;
 	&.hide {
 		display: none;
 	}
 }
+
+
 
 .link-button {
 	display: inline-block;
@@ -433,6 +437,10 @@ body {
 }
 
 #no-checked-restaurants, #no-saved-restaurants {
+		margin: 3% 0 0 3%;
+    font-family: @title;
+    padding: 10px;
+    max-width: 550px;
 	&.hide {
 		display: none;
 	}
