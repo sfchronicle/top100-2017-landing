@@ -358,6 +358,9 @@ function showintro_function(){
 
   document.getElementById('count-results').classList.add("hide");
 
+  document.getElementById('no-saved-restaurants').classList.add("hide");
+  document.getElementById('no-checked-restaurants').classList.add("hide");
+
 }
 
 // function to show "my list" restaurants -------------------------------------------------------------
