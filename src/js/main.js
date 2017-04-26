@@ -97,31 +97,44 @@ var edbId;
 var restaurantList;
 var saveTimer;
 function setCheckUser(delay, repetitions, success, error) {
+
   var x = 0;
   var intervalID = window.setInterval(function () {
+
     // loop while waiting for syncPaymeterSdk to load
     if ( window.syncPaymeterSdk ) {
       window.clearInterval( intervalID );
-      var a = window.syncPaymeterSdk;
-      a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
-       // set callback for completion of authorization
-        if ( treg.identity.edbId ) {
-          if ( success && typeof(success) === "function" ) {
-            success(treg.identity);
+
+      if ( treg.identity.edbId ) {
+
+        success(treg.identity);
+
+      } else {
+
+        var a = window.syncPaymeterSdk;
+        a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
+          // set callback for completion of authorization
+          if ( treg.identity.edbId ) {
+            if ( success && typeof(success) === "function" ) {
+              success(treg.identity);
+            }
+          } else {
+            if ( error && typeof(error) === "function" ) {
+              error();
+            }
           }
-        } else {
-          if ( error && typeof(error) === "function" ) {
-            error();
-          }
-        }
-      });
+        });
+      }
+
     } else if ( ++x === repetitions ) {
       window.clearInterval( intervalID );
       if ( error && typeof(error) === "function" ) {
         error();
       }
     }
+
   }, delay );
+
 }
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
