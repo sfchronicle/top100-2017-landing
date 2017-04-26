@@ -1,19 +1,22 @@
 {
-  "title": "",
-  "description": "",
-  "seo_title": "",
-  "author":"",
-  "hearst_category":"",
-  "date":"",
+  "title": "Top 100 Bay Area Restaurants 2017",
+  "seo_title": "Top 100 Bay Area Restaurants 2017",
+
+  "description": "Michael Bauer: Dining is more than sustenance — it’s pure, unadulterated joy. Explore the best of Bay Area dining, from brunch to the classics.",
+  "twitter_text": "Explore the best of the Bay Area’s dining scene.",
+
+
+  "author": "Michael Bauer and Lucio Villa and Emma ONeill",
+  "hearst_category": "Food :: Top 100 2017",
+  "date": "2017-04-27",
   "url": "http://projects.sfchronicle.com/2017/",
-  "slug": "SLUG-HERE-WITH-TRAILING-SLASH/",
-  "twitter_text":"",
-  "hashtag":"",
+  "slug": "top-100-restaurants/",
+  "hashtag": "Top100Restaurants",
   "image": "assets/social.jpg",
   "sheets": ["1RIDzCAjN4O5FYsS1ogGWcfwOPTRtTkclizth3vl4Bng"],
-  "docsID":"1hOrfaxHtrZ-TlXKD-35MKshKTMiJvAgU5OoNK5AnBwU",
+  "docsID": "1hOrfaxHtrZ-TlXKD-35MKshKTMiJvAgU5OoNK5AnBwU",
   "production": false,
   "embedded": false,
   "debug": false,
-  "staging_path":"test-proj/top2017"
+  "staging_path": "test-proj/top2017"
 }
