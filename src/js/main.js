@@ -179,6 +179,16 @@ function setIcons() {
 // check to see if a user is logged on on load
 var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
 
+if (treg.hasActiveSession() == false) {
+  console.log("no active session");
+  treg.registerEvent(treg.event.onSessionFound, function ()   {
+    // we are going to keep checking for the user ID if people log in
+    console.log("now we are checking again");
+    var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
+    console.log(result);
+  });
+}
+
 // saving restaurants as favorites ------------------------------------------------
 
 function saveNewData() {
@@ -598,15 +608,29 @@ showall_button.addEventListener("click",function() {
 // event listener for "My List" button
 var mylist_starred_button = document.getElementById('mylist-starred');
 mylist_starred_button.addEventListener("click",function() {
-  $(this).toggleClass("selected");
-  mylist_function(this);
+  if (edbId) {
+    $(this).toggleClass("selected");
+    mylist_function(this);
+  } else {
+    document.getElementById("log-in-instructions").classList.add("show");
+  }
 });
 
 // event listener for "My List" button
 var mylist_checked_button = document.getElementById('mylist-checked');
 mylist_checked_button.addEventListener("click",function() {
-  $(this).toggleClass("selected");
-  mylist_function(this);
+  if (edbId) {
+    $(this).toggleClass("selected");
+    mylist_function(this);
+  } else {
+    document.getElementById("log-in-instructions").classList.add("show");
+  }
+});
+
+// event listener for "My List" button
+var close_instructions = document.getElementById('log-in-instructions');
+close_instructions.addEventListener("click",function() {
+  document.getElementById("log-in-instructions").classList.remove("show");
 });
 
 // event listener for "My List" button

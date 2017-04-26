@@ -4,6 +4,31 @@ body {
 	background: #e5e6ea;
 }
 
+#log-in-instructions {
+	display: none;
+	position: absolute;
+	// position: relative;
+	z-index: 3000;
+	background: @light-gray;
+	font-size: 30px;
+	padding: 30px;
+	max-width: 500px;
+	top: 100px;
+	left: 0; right: 0;
+	text-align: center;
+	margin: auto;
+	.fa-times {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		font-size: 20px;
+		cursor: pointer;
+	}
+	&.show {
+		display: block;
+	}
+}
+
 .count-results {
 	font-style: italic;
 	.flex(0 1 100%);
