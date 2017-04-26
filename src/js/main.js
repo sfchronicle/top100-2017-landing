@@ -123,7 +123,7 @@ function setCheckUser(delay, repetitions, success, error) {
               error();
             }
           }
-        });
+        }) || error();
       }
 
     } else if ( ++x === repetitions ) {
