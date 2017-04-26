@@ -250,6 +250,7 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
     } else {
 
       document.getElementById("log-in-instructions").classList.add("show");
+      document.body.classList.add("noverflow");
 
     }
 
@@ -287,6 +288,7 @@ qsa(".check-restaurant").forEach(function(restaurant,index) {
     } else {
 
       document.getElementById("log-in-instructions").classList.add("show");
+      document.body.classList.add("noverflow");
 
     }
 
@@ -647,6 +649,7 @@ mylist_starred_button.addEventListener("click",function() {
     mylist_function(this);
   } else {
     document.getElementById("log-in-instructions").classList.add("show");
+    document.body.classList.add("noverflow");
   }
 });
 
@@ -658,13 +661,15 @@ mylist_checked_button.addEventListener("click",function() {
     mylist_function(this);
   } else {
     document.getElementById("log-in-instructions").classList.add("show");
+    document.body.classList.add("noverflow");
   }
 });
 
 // event listener for "My List" button
-var close_instructions = document.getElementById('log-in-instructions');
+var close_instructions = document.getElementById('exit');
 close_instructions.addEventListener("click",function() {
   document.getElementById("log-in-instructions").classList.remove("show");
+  document.body.classList.remove("noverflow");
 });
 
 // event listener for "My List" button
