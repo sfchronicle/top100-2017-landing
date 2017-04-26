@@ -129,6 +129,17 @@ function setCheckUser(delay, repetitions, success, error) {
 function errorCallBack() {
   console.log("error");
   $("#nouser").removeClass("hidden");
+
+  // check to see if user logs on after load
+  if (treg.hasActiveSession() == false) {
+    console.log("no active session");
+    treg.registerEvent(treg.event.onSessionFound, function ()   {
+      // we are going to keep checking for the user ID if people log in
+      console.log("now we are checking again");
+      successCallBack(treg.identity);
+      console.log(edbId);
+    });
+  }
 }
 
 // response if a user is logged in
@@ -179,16 +190,6 @@ function setIcons() {
 // check to see if a user is logged on on load
 var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
 
-if (treg.hasActiveSession() == false) {
-  console.log("no active session");
-  treg.registerEvent(treg.event.onSessionFound, function ()   {
-    // we are going to keep checking for the user ID if people log in
-    console.log("now we are checking again");
-    var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
-    console.log(result);
-  });
-}
-
 // saving restaurants as favorites ------------------------------------------------
 
 function saveNewData() {
@@ -210,26 +211,35 @@ function saveNewData() {
 qsa(".save-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
     console.log(restaurant.id);
-    $("i", this).toggleClass("fa-star-o fa-star");
 
-    console.log(savedData);
-    console.log(restaurantList);
+    if (restaurantList) {
+      $("i", this).toggleClass("fa-star-o fa-star");
 
-    // are we adding or removing the restaurant from the list?
-    if(  $("i", this).hasClass("fa-star") ) {
-      console.log("we do not have this restaurant yet");
-      restaurantList.push(restaurant.id);
+      console.log(savedData);
       console.log(restaurantList);
+
+      // are we adding or removing the restaurant from the list?
+      if(  $("i", this).hasClass("fa-star") ) {
+        console.log("we do not have this restaurant yet");
+        restaurantList.push(restaurant.id);
+        console.log(restaurantList);
+      } else {
+        console.log("we need to remove this restaurant")
+        var index = restaurantList.indexOf(restaurant.id);
+        restaurantList.splice(index,1);
+        console.log(restaurantList);
+      }
+
+      // save new data
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveNewData(),timeTimeout);
+
     } else {
-      console.log("we need to remove this restaurant")
-      var index = restaurantList.indexOf(restaurant.id);
-      restaurantList.splice(index,1);
-      console.log(restaurantList);
+
+      document.getElementById("log-in-instructions").classList.add("show");
+
     }
 
-    // save new data
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveNewData(),timeTimeout);
   });
 
 });
@@ -237,27 +247,38 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
 qsa(".check-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
     console.log(restaurant.id);
-    $("i", this).toggleClass("fa-square-o fa-check-square-o");
 
-    console.log(savedData);
-    console.log(restaurantList);
+    if (restaurantList) {
 
-    // are we adding or removing the restaurant from the list?
-    if(  $("i", this).hasClass("fa-check-square-o") ) {
-      console.log("we do not have this restaurant yet");
-      restaurantList.push(restaurant.id);
+      $("i", this).toggleClass("fa-square-o fa-check-square-o");
+
+      console.log(savedData);
       console.log(restaurantList);
+
+      // are we adding or removing the restaurant from the list?
+      if(  $("i", this).hasClass("fa-check-square-o") ) {
+        console.log("we do not have this restaurant yet");
+        restaurantList.push(restaurant.id);
+        console.log(restaurantList);
+      } else {
+        console.log("we need to remove this restaurant")
+        var index = restaurantList.indexOf(restaurant.id);
+        restaurantList.splice(index,1);
+        console.log(restaurantList);
+      }
+
+      // save new data
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveNewData(),timeTimeout);
+
     } else {
-      console.log("we need to remove this restaurant")
-      var index = restaurantList.indexOf(restaurant.id);
-      restaurantList.splice(index,1);
-      console.log(restaurantList);
+
+      document.getElementById("log-in-instructions").classList.add("show");
+
     }
 
-    // save new data
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveNewData(),timeTimeout);
   });
+
 
 });
 
