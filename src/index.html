@@ -25,7 +25,7 @@
   </div></div>
 
 <div id="container">
-  <div id="left-nav">
+  
     <div id="header">
       <div id="cover-wrapper">
         <div class="cover"></div>
@@ -92,47 +92,48 @@
 
     <%= t.include("partials/_bottom-nav.html") %>
 
-    </div>
-    <div id="restaurants">
-      <div class="count-results hide" id="count-results">100 result(s)</div>
-      <div class="intro hide" id="intro-container"><%= t.include("partials/_intro.html") %></div>
-      <div id="restaurants-wrap">
-        <% json.info.forEach(function(r) { %>
-          <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
-          <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
-          <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
-          <% var neighborhoods0 = r.SubRegion.toLowerCase().replace(",","/").replace(/ /g,''); %>
-          <% var neighborhoods = neighborhoods0.replace(/\//g," "); %>
-          <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
-          <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
-          <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
-          <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
-          <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } %>
-          <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
+  
+    
+  <div id="restaurants">
+    <div class="count-results hide" id="count-results">100 result(s)</div>
+    <div class="intro hide" id="intro-container"><%= t.include("partials/_intro.html") %></div>
+    <div id="restaurants-wrap">
+      <% json.info.forEach(function(r) { %>
+        <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
+        <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
+        <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
+        <% var neighborhoods0 = r.SubRegion.toLowerCase().replace(",","/").replace(/ /g,''); %>
+        <% var neighborhoods = neighborhoods0.replace(/\//g," "); %>
+        <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
+        <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
+        <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
+        <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
+        <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } %>
+        <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
-            <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>" target="_blank"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>" target="_blank"><% } %>
-                <img src="http://ww4.hdnux.com/photos/60/06/11/<%= photos[0] %>/3/premium_landscape.jpg">
-              </a>
-              <div class="name clearfix">
-                <div class="rname"><%= r.Name %></div>
-                <div class="favorites">
-                  <span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></span></i>
-                  <span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span>
-                </div>
+          <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>" target="_blank"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>" target="_blank"><% } %>
+              <img src="http://ww4.hdnux.com/photos/60/06/11/<%= photos[0] %>/3/premium_landscape.jpg">
+            </a>
+            <div class="name clearfix">
+              <div class="rname"><%= r.Name %></div>
+              <div class="favorites">
+                <span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></span></i>
+                <span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span>
               </div>
-              <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
-          </div>
-        <% }); %>
-      </div>
-      <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try new search filters.</div>
-      <div class="hide" id="no-saved-restaurants">You have no saved restaurants! Click on the stars to select restaurants for this list. Use this list to keep track of your favorite restaurants or restaurants you want to visit, or anything you like!</div>
-      <div class="hide" id="no-checked-restaurants">You have no checked restaurants! Click on the boxes to select restaurants for this list. Use this list to keep track of which restaurants you've visted, or anything you like!</div>
-
-      <%= t.include("partials/_full_footer.html") %>
-
+            </div>
+            <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
+        </div>
+      <% }); %>
     </div>
+    <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try new search filters.</div>
+    <div class="hide" id="no-saved-restaurants">You have no saved restaurants! Click on the stars to select restaurants for this list. Use this list to keep track of your favorite restaurants or restaurants you want to visit, or anything you like!</div>
+    <div class="hide" id="no-checked-restaurants">You have no checked restaurants! Click on the boxes to select restaurants for this list. Use this list to keep track of which restaurants you've visted, or anything you like!</div>
 
-    </div>
+    <%= t.include("partials/_full_footer.html") %>
+
+  </div>
+
+</div>
 
     <script>
       (function (exports) {

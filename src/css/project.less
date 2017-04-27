@@ -86,6 +86,7 @@ body {
   position: fixed;
   height:100%;
   top: 0;
+  z-index:1;
   left: 0;
   width: 350px;
   overflow:scroll;
@@ -167,7 +168,13 @@ body {
 }
 
 #restaurants{
+	width: -webkit-calc(~'100% - 350px');
+  width: -moz-calc(~'100% - 350px');
+  width: calc(~'100% - 350px');
+  margin:0 0 0 auto;
+
 	@media @width650{
+		width:100%;
 		padding-top:1em;
 		padding-bottom: 2em;
 	}
