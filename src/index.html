@@ -111,7 +111,7 @@
           <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } %>
           <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
-            <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>"><% } %>
+            <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>" target="_blank"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>" target="_blank"><% } %>
                 <img src="http://ww4.hdnux.com/photos/60/06/11/<%= photos[0] %>/3/premium_landscape.jpg">
               </a>
               <div class="name clearfix">
