@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= t.include("partials/_paywall.html") %>
     <%= t.include("partials/_head.html") %>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css?1">
   </head>
   <body>
 
@@ -112,7 +112,7 @@
         <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
 
           <% if (json.project.production) { %><a href="/2017/top-100-restaurants/<%= r.slug %>" target="_blank"><% } else { %><a href="/test-proj/top2017/<%= r.slug %>" target="_blank"><% } %>
-              <img src="http://ww4.hdnux.com/photos/60/06/11/<%= photos[0] %>/3/premium_landscape.jpg">
+              <img src="http://ww3.hdnux.com/photos/60/06/11/<%= photos[0] %>/7/premium_landscape.jpg">
             </a>
             <div class="name clearfix">
               <div class="rname"><%= r.Name %></div>
