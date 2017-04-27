@@ -41,6 +41,9 @@ $("#searchrestaurants").bind("input propertychange", function () {
   selNoise.classList.remove("active");
   selCuisine.classList.remove("active");
 
+  document.getElementById("intro-container").classList.add("hide");
+  document.getElementById("restaurants-wrap").classList.remove("hide");
+
   $(".restaurant").filter(function() {
 
     var classes = this.className.split(" ");
