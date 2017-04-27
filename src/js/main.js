@@ -19,7 +19,7 @@ var timeTimeout = 5000;
 
 // searchbar code
 $("#searchrestaurants").bind("input propertychange", function () {
-  var filter = $(this).val().toLowerCase().replace(/ /g,'');
+  var filter = $(this).val().toLowerCase().replace(/ /g,'').replace().replace(/'/g,'');
   var class_match = 0;
   count = 0;
 
