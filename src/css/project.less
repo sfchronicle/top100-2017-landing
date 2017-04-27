@@ -446,6 +446,20 @@ body {
   font-family: antennaregular;
   float:right;
   font-size:10px;
+
+  &.links{
+  	float:none;
+    .flex(0 0 50%);
+    font-size: 12px;
+    padding: 9px 0;
+    margin: 0 5px;
+    text-align:center;
+
+    &:hover{
+	    color: #ffffff;
+   	  background-color: rgba(122, 112, 154, 0.62);
+    }
+  }
 }
 
 #select-neighborhood {
@@ -579,3 +593,11 @@ body {
 .noverflow{
 	overflow:hidden;
 }
+
+#in-house{
+	.display-flex;
+	.justify-content(center);
+  padding: 10px 20px;
+}
+
+
