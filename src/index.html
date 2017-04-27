@@ -25,11 +25,11 @@
   </div></div>
 
 <div id="container">
-  
+
     <div id="header">
       <div id="cover-wrapper">
         <div class="cover"></div>
-        <div class="sf-logo"><img src="./assets/logos/sf_logo_black.png"></div>
+        <div class="sf-logo"><a href="http://www.sfchronicle.com/" target="_blank"><img src="./assets/logos/sf_logo_black.png"></a></div>
         <div class="top100-logo">
          <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
          <%= t.include("partials/_social.html") %>
@@ -87,13 +87,13 @@
         <div class="button filter" id="mylist-starred"><i class="fa fa-star" aria-hidden="true"></i>My favorites</div>
 
       </div>
-     
+
     </div>
 
     <%= t.include("partials/_bottom-nav.html") %>
 
-  
-    
+
+
   <div id="restaurants">
     <div class="count-results hide" id="count-results">100 result(s)</div>
     <div class="intro hide" id="intro-container"><%= t.include("partials/_intro.html") %></div>
@@ -126,8 +126,8 @@
       <% }); %>
     </div>
     <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try new search filters.</div>
-    <div class="hide" id="no-saved-restaurants">You have no saved restaurants! Click on the stars to select restaurants for this list. Use this list to keep track of your favorite restaurants or restaurants you want to visit, or anything you like!</div>
-    <div class="hide" id="no-checked-restaurants">You have no checked restaurants! Click on the boxes to select restaurants for this list. Use this list to keep track of which restaurants you've visted, or anything you like!</div>
+    <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Click the star next to any restaurant's name to add it to this list.</div>
+    <div class="hide" id="no-checked-restaurants">Use this list to keep track of which restaurants you've visted, or anything you like! Click the checkbox next to any restaurant's name to add it to this list.</div>
 
     <%= t.include("partials/_full_footer.html") %>
 
