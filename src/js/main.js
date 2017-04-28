@@ -372,6 +372,7 @@ function showall_function() {
 
   document.getElementById('no-saved-restaurants').classList.add("hide");
   document.getElementById('no-checked-restaurants').classList.add("hide");
+  document.getElementById("search-noresults").classList.add("hide");
 
   selCuisine.selectedIndex = 0;
   selNeighborhoods.selectedIndex = 0;
@@ -410,9 +411,10 @@ function showintro_function(){
   selCuisine.classList.remove("active");
 
   document.getElementById('count-results').classList.add("hide");
+  document.getElementById('count-results').classList.add("hide");
 
   document.getElementById('no-saved-restaurants').classList.add("hide");
-  document.getElementById('no-checked-restaurants').classList.add("hide");
+  document.getElementById('search-noresults').classList.add("hide");
 
 }
 
@@ -422,6 +424,8 @@ function mylist_function(list) {
 
   document.getElementById("restaurants-wrap").classList.remove("hide");
   document.getElementById("intro-container").classList.add("hide");
+  document.getElementById("search-noresults").classList.add("hide");
+
 
   var listID = list.getAttribute("id");
   // console.log(listID);
