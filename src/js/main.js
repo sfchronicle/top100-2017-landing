@@ -165,7 +165,7 @@ function successCallBack(identity) {
     edbId = identity.edbId;
     // console.log(edbId);
     getData();
-  } 
+  }
 }
 
 // retreive data
@@ -703,3 +703,21 @@ $(document).scroll(function() {
     $('#bottom-nav').hide();
   }
 });
+
+// making a brunch page
+
+if(window.location.hash) {
+  var hash = document.URL.substr(document.URL.indexOf('#'))
+
+  if (hash == "#brunch"){
+    brunch_button.classList.add("selected");
+    brunch_button.value = "brunch";
+    check_filters();
+  }
+
+  if (hash == "#new"){
+    new_button.classList.add("selected");
+    new_button.value = "new";
+    check_filters();
+  }
+}
