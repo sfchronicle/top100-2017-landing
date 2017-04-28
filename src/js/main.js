@@ -458,7 +458,8 @@ function mylist_function(list) {
       $(this).removeClass("active");
     }
   });
-  document.getElementById('count-results').classList.add("hide");
+
+  // document.getElementById('count-results').classList.add("hide");
   if (fav_count == 0) {
     if (prefix == "save") {
       document.getElementById('no-checked-restaurants').classList.add("hide");
@@ -467,9 +468,13 @@ function mylist_function(list) {
       document.getElementById('no-saved-restaurants').classList.add("hide");
       document.getElementById('no-checked-restaurants').classList.remove("hide");
     }
+    document.getElementById('count-results').classList.add("hide");
   } else {
     document.getElementById('no-saved-restaurants').classList.add("hide");
     document.getElementById('no-checked-restaurants').classList.add("hide");
+    document.getElementById('count-results').classList.remove("hide");
+    document.getElementById('count-results').innerHTML = fav_count+" result(s)";
+
   }
 
 }
@@ -704,7 +709,7 @@ $(document).scroll(function() {
   }
 });
 
-// making a brunch page
+// making special pages for Kim to social out ----------------------------------
 
 if(window.location.hash) {
   var hash = document.URL.substr(document.URL.indexOf('#'))
