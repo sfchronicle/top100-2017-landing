@@ -314,10 +314,14 @@ for(var i = 0; i < cuisines.length; i++) {
 }
 $('.dropdown-container').on('change', function(){
     $('body,html').animate({ scrollTop: $('#restaurants').position().top },300);
+    $('#brunch-spots').removeClass('show');
+    $('#new-additions').removeClass('show');
 });
 
 $('.filter').on('click', function(){
     $('body,html').animate({ scrollTop: $('#restaurants').position().top },300);
+    $('#brunch-spots').removeClass('show');
+    $('#new-additions').removeClass('show');
 });
 
 // neighborhoods drop-down ------------------
@@ -711,18 +715,26 @@ $(document).scroll(function() {
 
 // making special pages for Kim to social out ----------------------------------
 
-if(window.location.hash) {
-  var hash = document.URL.substr(document.URL.indexOf('#'))
+$(document).ready(function () {
 
-  if (hash == "#brunch"){
-    brunch_button.classList.add("selected");
-    brunch_button.value = "brunch";
-    check_filters();
-  }
+  if(window.location.hash) {
+    var hash = document.URL.substr(document.URL.indexOf('#'))
 
-  if (hash == "#new"){
-    new_button.classList.add("selected");
-    new_button.value = "new";
-    check_filters();
+    if (hash == "#brunch"){
+      brunch_button.classList.add("selected");
+      $('#brunch-spots').addClass('show');
+      brunch_button.value = "brunch";
+      check_filters();
+
+    }
+
+    if (hash == "#new"){
+      new_button.classList.add("selected");
+      $('#new-additions').addClass('show');
+      new_button.value = "new";
+      check_filters();
+    }
   }
-}
+  
+});
+
