@@ -143,29 +143,29 @@ function setCheckUser(delay, repetitions, success, error) {
 
 // response if a user is not logged in
 function errorCallBack() {
-  console.log("error");
+  // console.log("error");
   $("#nouser").removeClass("hidden");
 
   // check to see if user logs on after load
   if (treg.hasActiveSession() == false) {
-    console.log("no active session");
+    // console.log("no active session");
     treg.registerEvent(treg.event.onSessionFound, function ()   {
       // we are going to keep checking for the user ID if people log in
-      console.log("now we are checking again");
+      // console.log("now we are checking again");
       successCallBack(treg.identity);
-      console.log(edbId);
+      // console.log(edbId);
     });
   }
 }
 
 // response if a user is logged in
 function successCallBack(identity) {
-  console.log("success");
-  edbId = identity.edbId;
-  console.log(edbId);
-  // $("#userwelcome").html("Welcome " + identity.displayName);
-  // $("#founduser").removeClass("hidden");
-  getData();
+  if (identity.edbId != null) {
+    // console.log("success");
+    edbId = identity.edbId;
+    // console.log(edbId);
+    getData();
+  } 
 }
 
 // retreive data
@@ -177,14 +177,14 @@ function getData() {
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
     error: function(msg) {
       restaurantList = [];
-      console.log("fail");
+      // console.log("fail");
     },
     success: function(data) {
-      console.log("success");
+      // console.log("success");
       savedData = data;
       restaurantList = savedData;
       setIcons();
-      console.log(savedData);
+      // console.log(savedData);
     }
   });
 }
@@ -210,8 +210,8 @@ var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
 
 function saveNewData() {
   var newSavedData = {edbId:edbId,restaurants:restaurantList};
-  console.log("SENDING DATA ");
-  console.log(JSON.stringify(newSavedData));
+  // console.log("SENDING DATA ");
+  // console.log(JSON.stringify(newSavedData));
   $.ajax({
       method: "POST",
       data: JSON.stringify(newSavedData),
@@ -226,24 +226,24 @@ function saveNewData() {
 
 qsa(".save-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
-    console.log(restaurant.id);
+    // console.log(restaurant.id);
 
     if (restaurantList) {
       $("i", this).toggleClass("fa-star-o fa-star");
 
-      console.log(savedData);
-      console.log(restaurantList);
+      // console.log(savedData);
+      // console.log(restaurantList);
 
       // are we adding or removing the restaurant from the list?
       if(  $("i", this).hasClass("fa-star") ) {
-        console.log("we do not have this restaurant yet");
+        // console.log("we do not have this restaurant yet");
         restaurantList.push(restaurant.id);
-        console.log(restaurantList);
+        // console.log(restaurantList);
       } else {
-        console.log("we need to remove this restaurant")
+        // console.log("we need to remove this restaurant")
         var index = restaurantList.indexOf(restaurant.id);
         restaurantList.splice(index,1);
-        console.log(restaurantList);
+        // console.log(restaurantList);
       }
 
       // save new data
@@ -263,25 +263,25 @@ qsa(".save-restaurant").forEach(function(restaurant,index) {
 
 qsa(".check-restaurant").forEach(function(restaurant,index) {
   restaurant.addEventListener("click", function(e) {
-    console.log(restaurant.id);
+    // console.log(restaurant.id);
 
     if (restaurantList) {
 
       $("i", this).toggleClass("fa-square-o fa-check-square-o");
 
-      console.log(savedData);
-      console.log(restaurantList);
+      // console.log(savedData);
+      // console.log(restaurantList);
 
       // are we adding or removing the restaurant from the list?
       if(  $("i", this).hasClass("fa-check-square-o") ) {
-        console.log("we do not have this restaurant yet");
+        // console.log("we do not have this restaurant yet");
         restaurantList.push(restaurant.id);
-        console.log(restaurantList);
+        // console.log(restaurantList);
       } else {
-        console.log("we need to remove this restaurant")
+        // console.log("we need to remove this restaurant")
         var index = restaurantList.indexOf(restaurant.id);
         restaurantList.splice(index,1);
-        console.log(restaurantList);
+        // console.log(restaurantList);
       }
 
       // save new data
@@ -420,7 +420,7 @@ function mylist_function(list) {
   document.getElementById("intro-container").classList.add("hide");
 
   var listID = list.getAttribute("id");
-  console.log(listID);
+  // console.log(listID);
   if (listID == "mylist-starred") {
     var prefix = "save";
   } else {
@@ -678,7 +678,7 @@ close_instructions.addEventListener("click",function() {
 // event listener for "My List" button
 var showintro_button = document.getElementById('about');
 showintro_button.addEventListener("click",function() {
-  console.log("click");
+  // console.log("click");
   $(this).toggleClass("selected");
   $("#intro-container").toggleClass("hide");
   $("#restaurants-wrap").toggleClass("hide");
